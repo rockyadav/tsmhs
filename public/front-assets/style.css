@@ -2882,5 +2882,5 @@ span.c-text {display: inline-block;}
     margin-bottom: unset;
 }
 .download-area{
-    height: 235px;
+    height: 235px !important;
 }

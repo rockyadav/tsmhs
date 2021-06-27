@@ -224,7 +224,7 @@
                 <h3>Useful Link</h3>
                 <ul class="footer-list">
                     <li><a href="{{url('news')}}">News</a></li>
-                    <li><a href="{{url('downloads')}}">Download Link</a></li>
+                    <li><a href="{{url('download-links')}}">Download Link</a></li>
                     <li><a href="{{url('privacy-policy')}}">Privacy Policy</a></li>
                     <li><a href="{{url('terms-conditions')}}">Terms &amp; Conditions</a></li>
                 </ul>
