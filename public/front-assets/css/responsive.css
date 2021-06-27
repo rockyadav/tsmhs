@@ -233,6 +233,9 @@
         width: 100% !important;
         height: auto !important;
     }
+    .login-mobile{
+        margin-left: unset;
+    }
     .course-duration {
         margin-top: 50%;
     }

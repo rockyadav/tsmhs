@@ -44,11 +44,12 @@
                                         <div class="change-img-btn">
                                            <input type="file" name="pdf_file" required="" />
                                         </div>
+                                  <div class="uploadExtensionError" style="display: none; color:red;">Only pdf|docx|doc|xlsx|xls allowed!</div>
                                    </div>
                                 </div>
                             </div>
                          <div class="row text-center">
-                             <button class="btn btn-rose btn-fill" type="submit">Save</button>
+                             <button class="btn btn-rose btn-fill" id='submit' type="submit">Save</button>
                          </div>
                      </div>
                   </form>
@@ -57,5 +58,14 @@
      </div>
  </div>
 </div>
-
+<script>
+    $('#submit').click(function(event) {
+        var val = $('input[type=file]').val().toLowerCase();
+        var regex = new RegExp("(.*?)\.(pdf|docx|doc|xlsx|xls)$");
+        if(!(regex.test(val))) {
+            $('.uploadExtensionError').show();
+            event.preventDefault();
+        }
+    });
+</script>
 @endsection

@@ -30,9 +30,9 @@
       CKEDITOR.config.extraPlugins = 'easyimage';
     </script>
     <style type="text/css">
-        .sidebar .nav {
+        .sidebar .navmenu {
             margin-top: 15px;
-            height: 600px;
+            height: 800px;
         }
       .dropdown-menu.open {
           z-index: 999999;
@@ -83,7 +83,6 @@
 <style type="text/css">
     img{
         width: 200px;
-        background: #0099ff;
     }
 
 </style> 
@@ -92,8 +91,8 @@
         <div class="sidebar" data-active-color="purple" data-background-color="black" data-image="{{url('public')}}/assets/image/sidebar-2.jpg">
             <div class="logo text-center">
                <!-- <a href="{{url('dashboard')}}" class="simple-text logo-normal"> <h4><b>Us</b></h4> -->
-                 <a href="{{url('dashboard')}}" class="simple-text logo-normal">
-                    <img src="{{url('public/assets/image/new_logo1.png')}}" class="logo_new">
+                 <a href="{{url('/')}}" class="simple-text logo-normal">
+                    <img src="{{url('public/assets/image/new_logo.png')}}" class="logo_new">
                 </a>
                <!-- </a>  -->
             </div> 
@@ -144,7 +143,7 @@
                @php
                 $page = Request::segment(2);
                @endphp
-                <ul class="nav">
+                <ul class="nav navmenu">
                     <li class="@if($page=='dashboard') active @endif">
                         <a href="{{url('admin/dashboard')}}">
                             <i class="material-icons">dashboard</i>
@@ -230,6 +229,13 @@
                         <a href="{{url('admin/downloads')}}">
                             <i class="material-icons">dashboard</i>
                             <p>Downloads</p>
+                        </a>
+                    </li>
+
+                    <li class="@if($page=='inquiries') active @endif">
+                        <a href="{{url('admin/inquiries')}}">
+                            <i class="material-icons">dashboard</i>
+                            <p>Inquiries</p>
                         </a>
                     </li>
                 </ul>
@@ -380,6 +386,3 @@ function deleteData(id,type){
 </script>
 @yield('datatable-script')
 </html>            
-      
-        
- 

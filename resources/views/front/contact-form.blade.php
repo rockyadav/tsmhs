@@ -1,5 +1,5 @@
 @extends('layouts.frontTemplate')
-@section('page-title', 'Departments')
+@section('page-title', 'Contact Us')
 @section('content')
 <!--Breadcrumb Banner Area Start-->
 <div class="breadcrumb-banner-area">
@@ -89,7 +89,7 @@
                             <input type="text" name="country" placeholder="Country Of Residence" required="">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" name="mobile" placeholder="Phone" required="">
+                            <input type="text" name="mobile" placeholder="Phone" required="" onkeypress="return isNumber(event)" max="24">
                         </div>
                         <div class="col-md-6">
                             <input type="text" name="subject" placeholder="Nature of Enquiry" required="">

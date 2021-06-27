@@ -156,6 +156,11 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'AdminMiddleware' ],function
 	Route::post('news-update','Admin\NewsController@update');
 	Route::get('news-destroy/{id}', 'Admin\NewsController@destroy');
 
+	//Inquiries
+	Route::resource('inquiries','Admin\InquiriesController');
+	Route::get('inquiries/show/{id}','Admin\InquiriesController@show');
+	Route::get('inquiries-destroy/{id}', 'Admin\InquiriesController@destroy');
+
 });
 
 Route::group([ 'prefix' => 'student', 'middleware' => 'StudentMiddleware' ],function (){

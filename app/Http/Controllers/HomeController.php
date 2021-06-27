@@ -251,7 +251,7 @@ class HomeController extends Controller
            $grade = Cluster_requirement::where('status',1)->groupBy('grade')->orderBy('grade','asc')->get();
            $category = Categories::orderBy('name','asc')->get();
 
-        return view('registration', compact('title','country','state','courses','grade','category'));
+        return view('front.registration', compact('title','country','state','courses','grade','category'));
     }
 
 
