@@ -3,12 +3,10 @@
 @section('content')
 
 <style>
-
 .rimg{ 
   height : 50px!important;
   width : 50px!important ;
 }
-
 </style>
 
 <div class="content">
@@ -33,8 +31,8 @@
                             <thead>
                                 <tr>
                                     <th>SNO</th>
-                                    <th>Title</th>
                                     <th>Image</th>
+                                    <th>Title</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -49,13 +47,13 @@
                                 @endphp
                                 <tr>
                                 <td>{{$i}}</td>
-                                <td>{{$row->title}}</td>
                                 <td> @if($row->image != '')
                                     <img class="tem-img"  src="{{ url('public/images/slider/'.$row->image) }}"  alt="image" class="img">
                                     @else
                                     <img style="height: 80px; width: 80px;" src="{{url('public/images/image_placeholder.jpg')}}"  alt="image" class="img">
                                     @endif
                                 </td>
+                                <td>{{$row->title}}</td>
                                 <td class="td-actions">
                                         <a href="{{url('admin/slider/edit/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-success">
                                             <i class="material-icons">edit</i>
