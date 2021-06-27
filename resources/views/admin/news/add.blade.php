@@ -4,14 +4,11 @@
 
 <div class="content">
 <style type="text/css">
-
  .label-on-left {
    padding-top: 15px;
  }
-
 </style>
 @include('layouts.error-sucess-messages')
-
  <div class="container-fluid">
      <div class="row"> 
       <div class="col-md-12">
