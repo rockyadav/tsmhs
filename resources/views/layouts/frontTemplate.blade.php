@@ -33,7 +33,7 @@
 
 <!-- Style CSS
 ============================================ -->
-<link rel="stylesheet" href="{{url('public/front-assets/style.css')}}">
+<link rel="stylesheet" href="{{url('public/front-assets/style.css?t='.time())}}">
 
 <!-- Color CSS
 ============================================ -->
@@ -70,6 +70,12 @@
 <link rel="alternate stylesheet" type="text/css" href="{{url('public/front-assets/switcher/background3.css')}}" title="background3" media="screen" />
 <link rel="alternate stylesheet" type="text/css" href="{{url('public/front-assets/switcher/background4.css')}}" title="background4" media="screen" />
 <link rel="alternate stylesheet" type="text/css" href="{{url('public/front-assets/switcher/background5.css')}}" title="background5" media="screen" />
+
+<!-- jquery============================================ -->        
+<script src="{{url('public/front-assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
+<script type="text/javascript">
+ var base_url = "{{url('/')}}";
+</script>
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -91,10 +97,10 @@
                 </div>
                 <div class="col-lg-5 col-md-7 col-12">
                     <div class="header-top-right">
-                        <div class="content"><a href="#"><i class="zmdi zmdi-account"></i> My Account</a>
+                        <div class="content"><a href="javascript:;"><i class="zmdi zmdi-account"></i> My Account</a>
                             <ul class="account-dropdown">
                                 <li><a href="javascript:;">My Account</a></li>
-                                <li><a href="{{url('login-register')}}">Log In</a></li>
+                                <li><a href="{{url('login')}}">Log In</a></li>
                                 <li><a href="{{url('registration')}}">Register</a></li>
                             </ul>
                         </div>
@@ -109,7 +115,7 @@
             <div class="row">
                 <div class="col-lg-3 col-12">
                     <div class="logo">
-                        <a href="index.html"><img src="{{url('public/front-assets/img/logo/logo.png')}}" alt="EDUCAT"></a>
+                        <a href="{{url('/')}}"><img src="{{url('public/front-assets/img/logo/logo.png')}}" alt="TSMHS"></a>
                     </div>
                 </div>
                 <div class="col-lg-9 col-12">
@@ -118,7 +124,7 @@
                             <nav>
                                 <ul id="nav">
                                     <li class="current"><a href="{{url('/')}}">Home</a></li>
-                                    <li><a href="#">Management</a>
+                                    <li><a href="javascript:;">Management</a>
                                         <ul class="sub-menu large">
                                             <li><a href="{{url('director-message')}}">Message From The Director</a></li>
                                             <li><a href="{{url('principal-message')}}">Message From The Principal</a></li>
@@ -162,7 +168,7 @@
                         <nav id="dropdown">
                             <ul>
                                 <li class="current"><a href="{{url('/')}}">Home</a></li>
-                                <li><a href="#">Management</a>
+                                <li><a href="javascript:;">Management</a>
                                     <ul class="sub-menu large">
                                         <li><a href="{{url('director-message')}}">Message From The Director</a></li>
                                         <li><a href="{{url('principal-message')}}">Message From The Principal</a></li>
@@ -206,7 +212,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="single-footer-widget">
                 <div class="footer-logo">
-                    <a href="index.html"><img src="{{url('public/front-assets/img/logo/footer.png')}}" alt=""></a>
+                    <a href="index.html"><img src="{{url('public/front-assets/img/logo/logo.png')}}" alt=""></a>
                 </div>
                 <p>Being a hospital-based institution, and an affiliate of the famous Thika Nursing Home (which is only two minutes away from the school) as well as the Ruiru Private Hospital.</p>
             </div>
@@ -262,12 +268,6 @@
 </div>    
 <!--End of Main Wrapper Area--> 
 
-
-
-<!-- jquery
-============================================ -->        
-<script src="{{url('public/front-assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
-
 <!-- popper JS
 ============================================ -->        
 <script src="{{url('public/front-assets/js/popper.min.js')}}"></script>
@@ -291,5 +291,6 @@
 <!-- main JS
 ============================================ -->        
 <script src="{{url('public/front-assets/js/main.js')}}"></script>
+<script type="text/javascript" src="{{url('public/front-assets/js/custom.js?time='.time())}}"></script>
 </body>
 </html>

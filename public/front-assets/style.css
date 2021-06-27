@@ -15,6 +15,9 @@ html, body {height: 100%;}
 a:focus, button:focus {outline:0px solid}
 input:focus {box-shadow: 0; outline: 0}
 textarea {box-shadow: 0; outline: 0}
+.footer-log, .logo img {
+    max-width:75%;
+}
 img {
     max-width:100%;
     height:auto;
@@ -2883,4 +2886,11 @@ span.c-text {display: inline-block;}
 }
 .download-area{
     height: 235px !important;
+}
+
+.registration-form{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid #E67E22;
+    padding: 25px;
 }
