@@ -143,7 +143,7 @@
                                             <li><a href="{{url('video-gallery')}}">Video Gallery</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="{{url('downloads')}}">Downloads</a>
+                                    <li><a href="{{url('download-links')}}">Downloads</a>
                                     <li><a href="{{url('contact-us')}}">Contact Us</a></li>
                                 </ul>
                             </nav>
@@ -186,7 +186,7 @@
                                         <li><a href="{{url('video-gallery')}}">Video Gallery</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{{url('downloads')}}">Downloads</a>
+                                <li><a href="{{url('download-links')}}">Downloads</a>
                                 <li><a href="{{url('contact-us')}}">Contact Us</a></li>
                             </ul>
                         </nav>

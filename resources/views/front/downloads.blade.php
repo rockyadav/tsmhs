@@ -41,7 +41,7 @@
                        }
             @endphp
 			<div class="col-lg-4 col-md-6 col-12">
-				<div class="single-item">
+				<div class="single-item download-area">
 					<div class="single-item-image overlay-effect">
 						@if($row->pdf_file!="")
                         <a href="{{ url('public/downloads/'.$row->pdf_file) }}" target="_blank">

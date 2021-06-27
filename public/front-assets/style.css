@@ -1,62 +1,3 @@
-/*-----------------------------------------------------------------------------------
-
-    Template Name: Educat
-    Description: This is html5 template
-    Author: Devitems
-    Version: 1.0
-
------------------------------------------------------------------------------------
-    
-    CSS INDEX
-    ===================
-	
-    1. Theme Default CSS (body, link color, section etc)
-    2. Header CSS
-        2.1 Header Top
-        2.2 Header Logo Menu
-            2.2.1 Header Logo
-            2.2.2 Header Mainmenu
-            2.2.3 Header Searchbox
-            2.2.4 Mobile Menu
-    3. Slider Area
-    4. About Area
-    5. Course Area
-    6. Fun Factor Area
-    7. Latest News Area
-    8. Online Product Area
-    9. Testimonial Area
-    10. Event Area
-    11. Newsletter Area
-    12. Footer Widget Area
-    13. Footer Area
-    14. Home Two Start
-        14.1 Home Two Header
-        14.2 Home Two Slider
-        14.3 Home Two Newsletter
-    15. Shop Grid Page
-    16. Product Details Page
-    17. Course Page
-        17.1 Teachers Area
-    18. Course Details Page
-        18.1 Course Details Content
-        18.2 Course Details Sidebar
-    19. Event Page
-    20. Event Details Page
-        20.1 Event Details Content
-        20.2 Event Details Sidebar
-    21. latest News Page
-    22. News Details Page
-        22.1 News Details Content
-        22.2 News Details Sidebar
-    23. Contact Page
-    24. About Page
-    25. Shortcode
-    26. Scrollup
-    27. Additional CSS
-    28. Login Register CSS
-
------------------------------------------------------------------------------------*/
-
 /*----------------------------------------*/
 /*  1.  Theme default CSS
 /*----------------------------------------*/
@@ -168,7 +109,7 @@ body {
     background: #fff
 }
 .btn-group {
-	margin-left: 5px;
+    margin-left: 5px;
 }
 .container { width: 1200px}
 .container, .row, .col-md-12, .col-md-10, .col-md-9, .col-md-8, .col-md-6, .col-md-7, .col-md-6, .col-md-5, .col-md-4, .col-md-3, .col-md-2, .col-md-1, .as-mainwrapper {
@@ -505,7 +446,7 @@ body {
     transition: all 0.3s ease 0s;
 }
 .mainmenu-area .border-top {
-	border-top: 0 !important;
+    border-top: 0 !important;
 }
 .header-logo-menu.stick .mainmenu-area .mainmenu ul#nav > li > a {line-height: 96px}
 .header-logo-menu.stick .mainmenu-area {padding: 0; margin: 0;}
@@ -1376,9 +1317,9 @@ body {
 }
 .single-event-text > h3 a, .single-event-text > h3 {color: #4c4c4c;}
 .single-event-text > h3 {
-	font-family: "montserratregular";
-	margin-bottom: 5px;
-	font-size: 24px;
+    font-family: "montserratregular";
+    margin-bottom: 5px;
+    font-size: 24px;
 }
 .single-event-text {
     background: #f6f6f6 none repeat scroll 0 0;
@@ -1665,17 +1606,17 @@ body {
     margin-bottom: 0;
 }
 .pagination-content {
-	display: block;
-	line-height: 0;
-	text-align: center;
+    display: block;
+    line-height: 0;
+    text-align: center;
 }
 .pagination-content .pagination {
-	margin-bottom: 0;
-	display: inline-block;
-	padding-left: 0;
+    margin-bottom: 0;
+    display: inline-block;
+    padding-left: 0;
 }
 .pagination li {
-	display: inline-block;
+    display: inline-block;
 }
 .pagination-content.number .pagination {
     background: #ffffff none repeat scroll 0 0;
@@ -1683,16 +1624,16 @@ body {
     margin: 100px 0 20px;
 }
 .pagination-content.number .pagination li a {
-	border: 1px solid #86bc42;
-	display: inline-block;
-	font-family: raleway;
-	font-size: 14px;
-	font-weight: 500;
-	height: 27px;
-	line-height: 24px;
-	margin: 0 5px;
-	width: 26px;
-	vertical-align: middle;
+    border: 1px solid #86bc42;
+    display: inline-block;
+    font-family: raleway;
+    font-size: 14px;
+    font-weight: 500;
+    height: 27px;
+    line-height: 24px;
+    margin: 0 5px;
+    width: 26px;
+    vertical-align: middle;
 }
 .pagination-content.number .pagination li a i {font-size: 20px; line-height: 25px;}
 .pagination-content.number .pagination li a:hover, .pagination-content.number .pagination li.current a {
@@ -1873,11 +1814,11 @@ body {
     z-index: 9;
 }
 .single-teacher-text > h3 {
-	font-family: raleway;
-	font-weight: 600;
-	margin-bottom: 4px;
-	padding-top: 20px;
-	font-size: 24px;
+    font-family: raleway;
+    font-weight: 600;
+    margin-bottom: 4px;
+    padding-top: 20px;
+    font-size: 24px;
 }
 .single-teacher-item:hover .single-teacher-text > h3 {padding-top: 0;}
 .single-teacher-text > h3 a {color: #222222;}
@@ -1951,12 +1892,12 @@ body {
     width: 192px;
 }
 .course-duration .text span.text-right {
-	border: 0 none;
-	display: inline-block;
-	float: right;
-	padding: 0;
-	text-align: center !important;
-	width: 240px;
+    border: 0 none;
+    display: inline-block;
+    float: right;
+    padding: 0;
+    text-align: center !important;
+    width: 240px;
 }
 .comments {
     color: #4c4c4c;
@@ -2099,17 +2040,17 @@ span.comment-time {padding-right: 3px; position: relative;}
     z-index: 1;
 }
 .breadcrumb-bar .breadcrumb {
-	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-	line-height: 12px;
-	margin-bottom: 0;
-	padding: 15px 0 0;
-	justify-content: center;
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    line-height: 12px;
+    margin-bottom: 0;
+    padding: 15px 0 0;
+    justify-content: center;
 }
 .breadcrumb-bar .breadcrumb.text-left {
-	justify-content: flex-start;
+    justify-content: flex-start;
 }
 .breadcrumb-bar .breadcrumb.text-right {
-	justify-content: flex-end;
+    justify-content: flex-end;
 }
 .breadcrumb-text h1 {
     line-height: 25px;
@@ -2401,9 +2342,9 @@ span.c-text {display: inline-block;}
     line-height: 15px;
 }
 .skill-bar-item .progress {
-	border-radius: 0;
-	height: 14px;
-	margin-bottom: 20px;
+    border-radius: 0;
+    height: 14px;
+    margin-bottom: 20px;
 }
 .skill-bar-item {
     line-height: 16px;
@@ -2488,7 +2429,7 @@ span.c-text {display: inline-block;}
 .text-white {color: #fff}
 .text-blue, .header-top span.text-blue {color: #2E3F51}
 .bg-dark {
-	background: #3F5771 !important;
+    background: #3F5771 !important;
 }
 .bg-white {background: #fff}
 .bg-blue {background: #2E3F51}
@@ -2643,21 +2584,21 @@ span.c-text {display: inline-block;}
     top: 0
 }
 .zoom-icon a {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	right: 0;
-	text-align: center;
-	transform: translateY(-50%);
-	z-index: 99;
-	width: 50px;
-	height: 50px;
-	display: block;
-	color: #fff;
-	font-size: 20px;
-	line-height: 50px;
-	border: 1px solid #fff;
-	margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    transform: translateY(-50%);
+    z-index: 99;
+    width: 50px;
+    height: 50px;
+    display: block;
+    color: #fff;
+    font-size: 20px;
+    line-height: 50px;
+    border: 1px solid #fff;
+    margin: 0 auto;
 }
 .zoom-icon a:hover{
     color: #fff;
@@ -2939,4 +2880,7 @@ span.c-text {display: inline-block;}
 
 .event-area .section-title-wrapper {
     margin-bottom: unset;
+}
+.download-area{
+    height: 235px;
 }

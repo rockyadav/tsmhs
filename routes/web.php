@@ -29,23 +29,10 @@ Route::get('all-clear', function() {
 
 Auth::routes(); 
 
-Route::get('hosting-amount', function(){
-	return view('hosting');
-});
-
-Route::get('payment-successfully', function(){
-	echo 'payment-successfully-1';
-});
-
-Route::post('payment-successfully', function(){
-	echo 'payment-successfully-2';
-});
-
-
 Route::get('home', 'Admin\HomeController@checkLogin')->name('home');
 //check login
 Route::get('checklogin', 'Admin\HomeController@checkLogin');
-Route::get('/registration', 'HomeController@registration'); //url change
+Route::get('registration', 'HomeController@registration'); //url change
 
 Route::get('student-registration', 'HomeController@registration');
 Route::post('registrationAction', 'HomeController@registrationAction');
@@ -85,7 +72,7 @@ Route::get('contact-us', 'HomeController@contactUs');
 Route::post('contact-us-action', 'HomeController@contactUsAction');
 
 Route::get('login-register', 'HomeController@loginRegister');
-Route::get('downloads', 'HomeController@downloads');
+Route::get('download-links', 'HomeController@downloads');
 
 Route::get('terms-conditions', 'HomeController@termsConditions');
 Route::get('privacy-policy', 'HomeController@privacyPolicy');
