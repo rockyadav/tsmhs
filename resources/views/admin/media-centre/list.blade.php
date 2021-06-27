@@ -53,9 +53,9 @@
                             <thead>
                                 <tr>
                                     <th>SNO</th>
+                                    <th>Media</th>
                                     <th>Title</th>
                                     <th>Type</th>
-                                    <th>Media</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -70,8 +70,6 @@
                                 @endphp
                                 <tr>
                                 <td>{{$i}}</td>
-                                <td>{{$row->title}}</td>
-                                <td>{{$row->type}}</td>
                                @if($row->type=='image')
                                 <td> 
                                    
@@ -84,6 +82,8 @@
                                     <iframe width="250px" height="150px" src="{{$row->video_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </td>
                                 @endif
+                                <td>{{$row->title}}</td>
+                                <td>{{$row->type}}</td>
                                 <td class="td-actions">
                                         <a href="{{url('admin/media-centre/edit/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-success">
                                             <i class="material-icons">edit</i>
