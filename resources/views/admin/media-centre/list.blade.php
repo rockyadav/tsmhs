@@ -72,7 +72,6 @@
                                 <td>{{$i}}</td>
                                @if($row->type=='image')
                                 <td> 
-                                   
                                     @if($row->image != '')
                                     <img class="tem-img"  src="{{ url('public/images/media-centre/'.$row->image) }}"  alt="image" class="img" style="width: 250px; height:150px;">
                                     @endif

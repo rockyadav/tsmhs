@@ -3,12 +3,10 @@
 @section('content')
 
 <style>
-
 .rimg{ 
   height : 50px!important;
   width : 50px!important ;
 }
-
 </style>
 
 <div class="content">
