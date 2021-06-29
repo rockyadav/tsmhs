@@ -46,9 +46,116 @@
         @endforeach
      @endif
     </div>
-   
 </div>
 <!--End of Slider Area-->
+<!-- registration form start -->
+    <div class="col-lg-4 col-sm-12 col-xs-12 rg-form">
+        <div class="rg-form-box">
+            <h5 class="rg-title">Register Now</h5>
+        <div class="tab-content" id="home_registration_form">
+            <!-- tab pane 1 -->
+            <div class="tab-pane active" id="menu1">
+                <form method="post" action="{{url('student-registration')}}">
+                    {{csrf_field()}}
+
+                    <div class="form-group">
+                        <input type="text" name="first_name" class="form-control checkname" placeholder="First Name" id="fname" required="" value="{{old('first_name')}}">
+                        @if ($errors->has('first_name'))
+                           <span class="error-block">
+                           <strong>{{ $errors->first('first_name') }}</strong>
+                           </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="last_name" class="form-control checkname" placeholder="Last Name" id="lname" required="" value="{{old('last_name')}}">
+                        @if ($errors->has('last_name'))
+                           <span class="error-block">
+                           <strong>{{ $errors->first('last_name') }}</strong>
+                           </span>
+                        @endif
+                   </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Email ID" id="email" required="" value="{{old('email')}}">
+                        @if ($errors->has('email'))
+                           <span class="error-block">
+                           <strong>{{ $errors->first('email') }}</strong>
+                           </span>
+                        @endif
+                   </div>
+                    <div class="form-group">
+                        <input type="text" name="mobile" class="form-control numbersOnly" placeholder="Phone Number" id="tmobile" required="" value="{{old('mobile')}}">
+                        @if ($errors->has('mobile'))
+                           <span class="error-block">
+                           <strong>{{ $errors->first('mobile') }}</strong>
+                           </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        @php
+                            $grade_id = old('grade');
+                        @endphp
+                        <select name="grade" id="KCSEMeanGrade" class="form-control" required="">
+                           <option value="">Select KCSE Mean Grade</option>
+                           @if(count($data['grade'])>0)
+                           @foreach($data['grade'] as $g)
+                           <option value="{{$g->grade}}" @if($grade_id==$g->grade) selected @endif>{{$g->grade}}</option>
+                           @endforeach
+                           @endif
+                        </select>
+                        @if ($errors->has('grade'))
+                           <span class="error-block">
+                           <strong>{{ $errors->first('grade') }}</strong>
+                           </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        @php
+                            $category_id = old('category');
+                        @endphp
+                        <select name="category" id="category" class="form-control" required="">
+                           <option value="">Select Level</option>
+                           @if(count($data['category'])>0)
+                           @foreach($data['category'] as $c)
+                           <option value="{{$c->id}}" @if($category_id==$c->id) selected @endif>{{$c->name}}</option>
+                           @endforeach
+                           @endif
+                        </select>
+                        @if ($errors->has('category'))
+                           <span class="error-block">
+                           <strong>{{ $errors->first('category') }}</strong>
+                           </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        @php
+                            $course_id = old('course');
+                        @endphp
+                        <select name="course" id="courses" class="form-control" required="">
+                           <option value="">Select Category First</option>
+                           @if(count($data['courses'])>0)
+                           @foreach($data['courses'] as $cr)
+                           <option value="{{$cr->id}}" @if($course_id==$cr->id) selected @endif>{{$cr->name}}</option>
+                           @endforeach
+                           @endif
+                        </select>
+                        @if ($errors->has('course'))
+                           <span class="error-block">
+                           <strong>{{ $errors->first('course') }}</strong>
+                           </span>
+                        @endif
+                    </div>
+                    <div class="form-group">             
+                        <div class="new_btn_custom text-center">
+                                <button type="Submit" style="width: 110px;font-size: 14px;" class="btn btn-default" id="mysubmitbtn">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Tab panes end -->
+        </div>
+    </div>
+<!-- registration form end -->
 <!--About Area Start--> 
 <div class="about-area">
     <div class="container">

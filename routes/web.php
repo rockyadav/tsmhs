@@ -37,6 +37,10 @@ Route::get('registration', 'HomeController@registration'); //url change
 Route::get('student-registration', 'HomeController@registration');
 Route::post('registrationAction', 'HomeController@registrationAction');
 
+//registration from home page
+Route::post('student-registration', 'HomeController@studentRegistration');
+Route::get('registration-form', 'HomeController@registrationForm');
+
 //mail template
 Route::get('mail-template', 'HomeController@mailTemplate');
 
