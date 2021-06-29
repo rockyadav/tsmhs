@@ -97,12 +97,7 @@
                 </div>
                 <div class="col-lg-5 col-md-7 col-12">
                     <div class="header-top-right">
-                        <div class="content"><a href="javascript:;"><i class="zmdi zmdi-account"></i> My Account</a>
-                            <ul class="account-dropdown">
-                                <li><a href="javascript:;">My Account</a></li>
-                                <li><a href="{{url('login')}}">Log In</a></li>
-                                <li><a href="{{url('registration')}}">Register</a></li>
-                            </ul>
+                        <div class="content"><a href="{{url('login')}}"><i class="zmdi zmdi-account"></i> Login</a>
                         </div>
                     </div>
                 </div>
@@ -124,7 +119,7 @@
                             <nav>
                                 <ul id="nav">
                                     <li class="current"><a href="{{url('/')}}">Home</a></li>
-                                    <li><a href="javascript:;">Management</a>
+                                    <li><a href="javascript:;">About Us</a>
                                         <ul class="sub-menu large">
                                             <li><a href="{{url('director-message')}}">Message From The Director</a></li>
                                             <li><a href="{{url('principal-message')}}">Message From The Principal</a></li>
@@ -132,7 +127,7 @@
                                             <li><a href="{{url('dean-message')}}">Message From The Dean of Students</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="{{url('departments')}}">Departments</a></li>
+                                    <li><a href="{{url('departments')}}">Courses</a></li>
                                     @php $facilities =  Helper::getFacilities();  @endphp
                                     <li><a href="javascript:;">Facilities</a>
                                         <ul class="sub-menu large">
@@ -143,13 +138,35 @@
                                         @endif 
                                         </ul>
                                     </li>
-                                    <li><a href="javascript:;">Media Centre</a>
+                                    <li><a href="javascript:;">Campuses</a>
                                         <ul class="sub-menu large">
-                                            <li><a href="{{url('image-gallery')}}">Image Gallery</a></li>
-                                            <li><a href="{{url('video-gallery')}}">Video Gallery</a></li>
+                                            <li>
+                                                <a href="javascript:;">Kitui</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">Nairobi</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">Kisumu</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:;">Mombasa</a>
+                                            </li>
                                         </ul>
                                     </li>
-                                    <li><a href="{{url('download-links')}}">Downloads</a>
+                                    <li><a href="javascript:;">Happenings</a>
+                                        <ul class="sub-menu large">
+                                            <li>
+                                                <a href="{{url('image-gallery')}}">Image Gallery</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{url('video-gallery')}}">Video Gallery</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{url('download-links')}}">Downloads</a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                     <li><a href="{{url('contact-us')}}">Contact Us</a></li>
                                 </ul>
                             </nav>
@@ -168,7 +185,7 @@
                         <nav id="dropdown">
                             <ul>
                                 <li class="current"><a href="{{url('/')}}">Home</a></li>
-                                <li><a href="javascript:;">Management</a>
+                                <li><a href="javascript:;">About Us</a>
                                     <ul class="sub-menu large">
                                         <li><a href="{{url('director-message')}}">Message From The Director</a></li>
                                         <li><a href="{{url('principal-message')}}">Message From The Principal</a></li>
@@ -176,7 +193,7 @@
                                         <li><a href="{{url('dean-message')}}">Message From The Dean of Students</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{{url('departments')}}">Departments</a></li>
+                                <li><a href="{{url('departments')}}">Courses</a></li>
                                 <li><a href="javascript:;">Facilities</a>
                                     <ul class="sub-menu large">
                                     @if(count($facilities)>0)
@@ -186,13 +203,35 @@
                                     @endif 
                                     </ul>
                                 </li>
-                                <li><a href="javascript:;">Media Centre</a>
+                                <li><a href="javascript:;">Campuses</a>
                                     <ul class="sub-menu large">
-                                        <li><a href="{{url('image-gallery')}}">Image Gallery</a></li>
-                                        <li><a href="{{url('video-gallery')}}">Video Gallery</a></li>
+                                        <li>
+                                            <a href="javascript:;">Kitui</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">Nairobi</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">Kisumu</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">Mombasa</a>
+                                        </li>
                                     </ul>
                                 </li>
-                                <li><a href="{{url('download-links')}}">Downloads</a>
+                                <li><a href="javascript:;">Happenings</a>
+                                    <ul class="sub-menu large">
+                                        <li>
+                                            <a href="{{url('image-gallery')}}">Image Gallery</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('video-gallery')}}">Video Gallery</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('download-links')}}">Downloads</a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li><a href="{{url('contact-us')}}">Contact Us</a></li>
                             </ul>
                         </nav>
