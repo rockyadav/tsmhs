@@ -1,7 +1,3 @@
-$(document).ready(function(){
-  $('#eligibilityModal').modal('show');
-});
-
 $(document).on('change', '#KCSEMeanGrade', function (e) { 
     $('#category').val('');
     $('#courses').val('');

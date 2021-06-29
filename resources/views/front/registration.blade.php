@@ -45,8 +45,28 @@
   $session = 0;
   if(session()->get('setEligibility'))
   {
-  $eligible = session()->get('setEligibility');
-  $session = 1;
+     $eligible = session()->get('setEligibility');
+     $session = 1;
+     $first_name = $eligible['first_name'];
+     if(old('first_name')!='')
+     {
+       $first_name = old('first_name');
+     }
+     $last_name = $eligible['last_name'];
+     if(old('last_name')!='')
+     {
+       $last_name = old('last_name');
+     }
+     $mobile = $eligible['mobile'];
+     if(old('mobile')!='')
+     {
+       $mobile = old('mobile');
+     }
+     $email = $eligible['email'];
+     if(old('email')!='')
+     {
+       $email = old('email');
+     }
   }
   @endphp
   @if($session)
@@ -59,7 +79,7 @@
                  <div class="col-md-3">
                     <div class="form-group">
                        <label class="user-label">First Name<span style="color: red">*</span></label>
-                       <input type="text" name="first_name" class="form-control" required="" value="{{old('first_name')}}">
+                       <input type="text" name="first_name" class="form-control" required="" value="{{$first_name}}">
                        @if ($errors->has('first_name'))
                        <span class="error-block">
                        <strong>{{ $errors->first('first_name') }}</strong>
@@ -70,7 +90,7 @@
                  <div class="col-md-3">
                     <div class="form-group">
                        <label class="user-label">Last Name<span style="color: red">*</span></label>
-                       <input type="text" name="last_name" class="form-control" required="" value="{{old('last_name')}}">
+                       <input type="text" name="last_name" class="form-control" required="" value="{{$last_name}}">
                        @if ($errors->has('last_name'))
                        <span class="error-block">
                        <strong>{{ $errors->first('last_name') }}</strong>
@@ -81,7 +101,7 @@
                  <div class="col-md-3">
                     <div class="form-group">
                        <label class="user-label">Mobile<span style="color: red">*</span></label>
-                       <input type="text" name="mobile" class="form-control" required="" value="{{old('mobile')}}" onkeypress="return isNumber(event)" max="24">
+                       <input type="text" name="mobile" class="form-control" required="" value="{{$mobile}}" onkeypress="return isNumber(event)" max="24">
                        @if ($errors->has('mobile'))
                        <span class="error-block">
                        <strong>{{ $errors->first('mobile') }}</strong>
@@ -105,7 +125,7 @@
                  <div class="col-md-3">
                     <div class="form-group">
                        <label class="user-label">Email<span style="color: red">*</span></label>
-                       <input type="email" name="email" class="form-control" value="{{old('email')}}" required="">
+                       <input type="email" name="email" class="form-control" value="{{$email}}" required="" @if($eligible['email']!='') readonly @endif>
                        @if ($errors->has('email'))
                        <span class="error-block">
                        <strong>{{ $errors->first('email') }}</strong>
@@ -419,6 +439,11 @@
      </div>
   </div>
   <script type="text/javascript">
+      @if($hide)
+         $(document).ready(function(){
+           $('#eligibilityModal').modal('show');
+         });
+      @endif
      $(document).ready(function(){          
        $('#kcse_grade').keyup(function(){
        var  grade = $(this).val();

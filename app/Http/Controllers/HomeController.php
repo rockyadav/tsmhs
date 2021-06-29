@@ -40,11 +40,18 @@ class HomeController extends Controller
 
     public function index()
     {
-      $data['sliders'] = Slider::getData();
-      $data['departments'] = Department::paginate(3);
-      $data['news'] = News::paginate(3);
-      $data['events'] = Events::paginate(3);
-         
+        $data['sliders'] = Slider::getData();
+        $data['departments'] = Department::paginate(3);
+        $data['news'] = News::paginate(3);
+        $data['events'] = Events::paginate(3);
+        $data['grade'] = Cluster_requirement::where('status',1)->groupBy('grade')->orderBy('grade','asc')->get();
+        $data['category'] = Categories::orderBy('name','asc')->get();
+        $data['courses'] = array(); 
+        if(session()->has('setEligibility'))
+        {
+            $eligible = session()->get('setEligibility');
+            $data['courses'] = Cluster_requirement::where(['cluster_requirements.category_id'=>$eligible['category_id'],'cluster_requirements.grade'=>$eligible['grade'],'cluster_requirements.status'=>1])->join('courses','courses.id','=','cluster_requirements.course_id')->select('courses.id','courses.name')->orderBy('courses.name','asc')->get();
+        }
       return view('front.index',compact('data'));
     }
 
@@ -250,32 +257,38 @@ class HomeController extends Controller
                             
            $grade = Cluster_requirement::where('status',1)->groupBy('grade')->orderBy('grade','asc')->get();
            $category = Categories::orderBy('name','asc')->get();
-
-        return view('front.registration', compact('title','country','state','courses','grade','category'));
+        $hide = 1;
+        return view('front.registration', compact('title','country','state','courses','grade','category','hide'));
     }
 
 
     public function registrationAction(Request $request)
     {
         $validator = Validator::make($request->all(), [
-          'mobile'        => 'required|unique:users',
+          'mobile'           => 'required',
+          'email'            => 'required',
           'first_name'       => 'required',
-          'last_name'       => 'required',
-          'national_id'       => 'required',
-          'preferred_intake'       => 'required',
-          'campus_of_study'       => 'required',
-          'mode_of_study'       => 'required',
-          'kcse_marksheet'      => 'required|mimes:jpeg,jpg,png|max:10000',
-          'your_picture'       => 'mimes:jpeg,jpg,png|max:10000',
+          'last_name'        => 'required',
+          'national_id'      => 'required',
+          'preferred_intake' => 'required',
+          'campus_of_study'  => 'required',
+          'mode_of_study'    => 'required',
+          'kcse_marksheet'   => 'required|mimes:jpeg,jpg,png|max:10000',
+          'your_picture'     => 'mimes:jpeg,jpg,png|max:10000',
           ]);
 
         if ($validator->fails()) 
         {
             return redirect()->back() ->withErrors($validator)->withInput(); 
         }
-
-         
-          $catdata = new User;
+          $email = trim($request['email']);
+          $checkemail = User::where(['email'=>$email,'verification'=>0])->first();
+          if(!empty($checkemail))
+          {
+            $catdata = User::find($checkemail->id);
+          }else{
+            $catdata = new User;
+          }
 
           $check = DB::table('users')
                    ->orderBy('id','DESC')
@@ -286,7 +299,7 @@ class HomeController extends Controller
           {    
             $apno = $check->registration_number;
             $ss = explode('-',$apno);
-            $appno = $ss[1]+1;
+            $appno = $ss[2]+1;
             $order_no ="TSMHS-".date('Y')."-".$appno;
           }else{
              $order_no ="TSMHS-".date('Y')."-1";
@@ -348,6 +361,7 @@ class HomeController extends Controller
           $catdata->educational_background= trim($request['educational_background']);
           $catdata->financing_of_study    = trim($request['financing_of_study']);
           $catdata->campus_of_study       = trim($request['campus_of_study']);
+          $catdata->register_step         = 2;
          
         $result =  $catdata->save();  
         if($result)
@@ -440,11 +454,74 @@ class HomeController extends Controller
     {
       if(count($_POST)>0)
       {
-        $sesion = session()->put('setEligibility',['grade'=>$request['grade'],'category_id'=>$request['category_id'],'course_id'=>$request['course_id']]);
+        $sesion = session()->put('setEligibility',['grade'=>$request['grade'],'category_id'=>$request['category_id'],'course_id'=>$request['course_id'],'first_name'=>'','last_name'=>'','mobile'=>'','email'=>'']);
         return back()->with('success', 'Eligibility set successfully');
       }else{
         return redirect('/');
       }
+    }
+
+    public function studentRegistration(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+          'mobile'     => 'required',
+          'first_name' => 'required',
+          'last_name'  => 'required',
+          'email'      => 'required|unique:users',
+          'grade'      => 'required',
+          'category'   => 'required',
+          'course'     => 'required'
+          ]);
+
+        if ($validator->fails()) 
+        {
+            return redirect()->back()->withErrors($validator)->withInput(); 
+        } 
+
+          $inst  = new User;
+          $inst->first_name             = trim($request['first_name']);
+          $inst->last_name              = trim($request['last_name']);
+          $inst->mobile                 = trim($request['mobile']);
+          $inst->email                  = trim($request['email']);
+          $inst->kcse_grade             = trim($request['grade']);
+          $inst->intrested_course       = trim($request['course']);
+          $inst->education_level        = trim($request['category']);
+          $inst->register_step          = 1;
+          $res = $inst->save();
+          if($res)
+          {
+            session()->put('setEligibility',['grade'=>$request['grade'],'category_id'=>$request['category'],'course_id'=>$request['course'],'first_name'=>$request['first_name'],'last_name'=>$request['last_name'],'mobile'=>$request['mobile'],'email'=>$request['email']]);
+
+            return redirect('registration-form');
+          }else{
+            return redirect('registration')->with('error', 'Check your eligibility and completed registration form');
+          }
+    }
+
+    public function registrationForm(Request $request)
+    {
+          $title = 'Registraion'; 
+
+          $country = DB::table('countries')
+                     ->where('id',1)
+                     ->orderBy('name','asc')
+                     ->get();
+
+          $state = DB::table('county')
+                     ->where('country_id',1)
+                     ->orderBy('name','asc')
+                     ->get(); 
+          $courses = array(); 
+            if(session()->get('setEligibility'))
+            {
+              $eligible = session()->get('setEligibility');
+              $courses = Cluster_requirement::where(['cluster_requirements.category_id'=>$eligible['category_id'],'cluster_requirements.grade'=>$eligible['grade'],'cluster_requirements.status'=>1])->join('courses','courses.id','=','cluster_requirements.course_id')->select('courses.id','courses.name')->orderBy('courses.name','asc')->get();
+            }
+                            
+           $grade = Cluster_requirement::where('status',1)->groupBy('grade')->orderBy('grade','asc')->get();
+           $category = Categories::orderBy('name','asc')->get();
+        $hide = 0;
+        return view('front.registration', compact('title','country','state','courses','grade','category','hide'));
     }
 
     /* end of class*/
