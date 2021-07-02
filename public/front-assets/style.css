@@ -949,7 +949,7 @@ body {
 .about-area {
     background: rgba(0, 0, 0, 0) url("img/banner/1.jpg") no-repeat scroll center top;
     color: #ffffff;
-    margin-top: 140px;
+    margin-top: 75px;
     padding-bottom: 54px;
     position: relative;
 }
@@ -1073,9 +1073,9 @@ body {
 /*  6. Fun Factor Area
 /*----------------------------------------*/
 .fun-factor-area {
-    background: rgba(0, 0, 0, 0) url("img/banner/2.jpg") repeat scroll 0 0;
     color: #ffffff;
-    padding: 100px 0;
+    padding: 23px 0;
+    background-color: #e67e22;
 }
 .single-fun-factor {font-family: "montserratregular"; text-align: center;}
 .single-fun-factor > h4 {
@@ -2911,6 +2911,11 @@ span.c-text {display: inline-block;}
     text-align: center;
     padding: 0px 0px 13px 0px;
 }
+
+.rg-form-box strong {
+    color: #fff;
+}
+
 @media screen and (max-width: 769px)
 {
     .rg-form {
@@ -2933,6 +2938,14 @@ span.c-text {display: inline-block;}
     }
 }
 
-.rg-form-box strong {
-    color: #fff;
+@media (min-width: 992px)
+{
+    .rg-form {
+        margin-top: -499px;
+    }
+}
+
+.trophy img{
+    max-width: 20% !important;
+    margin-bottom: 20px !important;
 }

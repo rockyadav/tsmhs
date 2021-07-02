@@ -24,14 +24,21 @@
                      <div class="card-content">
                         <div class="row">
                             <div class="col-md-6">
-                                <label class="col-sm-3 label-on-left">Title</label>
-                                 <div class="col-sm-9">
+                                <label class="col-sm-4 label-on-left">Select Campus</label>
+                                 <div class="col-sm-8">
                                      <div class="form-group label-floating is-empty">
                                          <label class="control-label"></label>
-                                         <input type="text"  class="form-control" name="title" placeholder="Enter Title" value="{{old('name')}}">
-                                         @if ($errors->has('title'))
+                                         <select name="campus" id="campus" class="form-control" required>
+                                            <option value=""> Select Campus</option>
+                                              @if(count($data['campuses'])>0)
+                                                @foreach($data['campuses'] as $camp)
+                                                    <option value="{{$camp->id}}">{{$camp->name}}</option>
+                                                @endforeach
+                                              @endif
+                                        </select>
+                                         @if ($errors->has('campus'))
                                              <span class="error-block">
-                                            <strong>{{ $errors->first('title') }}</strong>
+                                            <strong>{{ $errors->first('campus') }}</strong>
                                             </span>
                                          @endif
                                      </div>
@@ -39,8 +46,8 @@
                             </div>
                            
                              <div class="col-md-6">
-                                 <label class="col-sm-3 label-on-left">Type</label>
-                                  <div class="col-sm-9">
+                                 <label class="col-sm-2 label-on-left">Type</label>
+                                  <div class="col-sm-10">
                                       <div class="form-group label-floating is-empty">
                                           <label class="control-label"></label>
                                              <select class="selectpicker" data-style="select-with-transition" title="Choose Type*" data-size="7" name="type"  required="">
@@ -57,7 +64,7 @@
                                   </div>
                              </div>
                              <div class="col-md-6 img"> <br>
-                                 <label class="col-sm-3 label-on-left">Image</label>
+                                 <label class="col-sm-4 label-on-left">Image</label>
                                 <div class="card-profile" style="text-align: left;">
                                         <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                             <div class="fileinput-new thumbnail">
@@ -77,8 +84,8 @@
                                 </div>
                             </div>
                              <div class="col-md-6 video_link">
-                                <label class="col-sm-3 label-on-left">Video link</label>
-                                 <div class="col-sm-9">
+                                <label class="col-sm-4 label-on-left">Video link</label>
+                                 <div class="col-sm-8">
                                      <div class="form-group label-floating is-empty">
                                          <label class="control-label"></label>
                                          <input type="text" class="form-control" name="video_link" placeholder="Enter Vidoe Link" value="{{old('video_link')}}">

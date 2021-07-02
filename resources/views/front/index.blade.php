@@ -1,7 +1,7 @@
 @extends('layouts.frontTemplate')
 @section('page-title', 'Home')
 @section('content')
- <!--Slider Area Start-->
+<!--Slider Area Start-->
 <div class="slider-area slider-two">
     <div class="preview-2">
         <div id="nivoslider" class="slides"> 
@@ -17,37 +17,10 @@
          @endforeach
          @endif
         </div> 
-        
-        @if(count($data['sliders'])>0)
-        @php
-          $i=0;
-        @endphp
-        @foreach($data['sliders'] as $slider)
-        @php
-          $i++;
-        @endphp
-        @if(!empty($slider->title))
-        <div id="slider-1-caption{{$i}}" class="nivo-html-caption nivo-caption">
-            <div class="banner-content slider-{{$i}}">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="text-content-wrapper">
-                                <div class="text-content @if($i!=1) slider-{{$i}} @endif">
-                                    <h1 class="title1">{{$slider->title}}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> 
-        @endif
-        @endforeach
-     @endif
     </div>
 </div>
 <!--End of Slider Area-->
+
 <!-- registration form start -->
     <div class="col-lg-4 col-sm-12 col-xs-12 rg-form">
         <div class="rg-form-box">
@@ -156,6 +129,34 @@
         </div>
     </div>
 <!-- registration form end -->
+
+<!--Fun Factor Area Start-->
+<div class="fun-factor-area trophy">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="single-fun-factor">
+                    <img src="{{url('public/front-assets/trophy/trophy.png')}}">
+                    <h4>Teachers</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="single-fun-factor">
+                    <img src="{{url('public/front-assets/trophy/trophy.png')}}">
+                    <h4>Members</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="single-fun-factor">
+                    <img src="{{url('public/front-assets/trophy/trophy.png')}}">
+                    <h4>Courses</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of Fun Factor Area-->
+
 <!--About Area Start--> 
 <div class="about-area">
     <div class="container">
@@ -163,7 +164,9 @@
             <div class="col-lg-8 col-md-12">
                 <div class="about-container">
                     <h3>WHY TSMHS ?</h3>
-                    <p>Being a hospital-based institution, and an affiliate of the famous Thika Nursing Home (which is only two minutes away from the school) as well as the Ruiru Private Hospital, this medical training facility gives students a great opportunity to get hands-on experience and practice in the realm of their training. And unlike other medical training institutions, the students get to choose between two different hospital environments, namely Thika and Ruiru.</p>      
+                    <p>Being a hospital-based institution, and an affiliate of the famous Thika Nursing Home (which is only two minutes away from the school) as well as the Ruiru Private Hospital, this medical training facility gives students a great opportunity to get hands-on experience and practice in the realm of their training. And unlike other medical training institutions, the students get to choose between two different hospital environments, namely Thika and Ruiru...
+                    <a href="{{url('about-us')}}" style="color:blue;">Read more</a> 
+                    </p>
                 </div>
             </div>
         </div>
@@ -230,19 +233,30 @@
             <div class="col-lg-6 col-md-12 col-12">
                 <div class="single-latest-item">
                     <div class="single-latest-image">
-                        <a href="{{url('news-details/'.$newss->page_url)}}"><img src="{{ url('public/images/news/'.$newss->image) }}" alt="" style="width:236px; height: 234px;"></a>
+                        <a href="{{url('news-details/'.$newss->page_url)}}"><img src="{{ url('public/images/news/'.$newss->image) }}" alt="" style="width:236px; height: 212px;"></a>
                     </div>
                     <div class="single-latest-text">
-                        <h3><a href="{{url('news-details/'.$newss->page_url)}}">{{$newss->title}}</a></h3>
+                        <h3>
+                            <a href="{{url('news-details/'.$newss->page_url)}}">
+                            @php 
+                            if(strlen($newss->title) > 22){
+                             echo substr($newss->title,0,22)."...";
+                            }
+                            else{
+                                echo $newss->title;
+                            } 
+                            @endphp
+                            </a>
+                        </h3>
                         <div class="single-item-comment-view">
                            <span><i class="zmdi zmdi-calendar-check"></i>{{date('d M Y',strtotime($newss->news_date))}}</span>
                        </div>
                        <p>@php
-                            if(strlen($newss->description) > 200){
-                                echo substr($newss->description,0,200) . " ...";
+                            if(strlen(strip_tags($newss->description)) > 85){
+                                echo substr(strip_tags($newss->description),0,85) . " ...";
                             }
                             else{
-                                echo $newss->description;
+                                echo strip_tags($newss->description);
                             }
                         @endphp</p>
                        <a href="{{url('news-details/'.$newss->page_url)}}" class="button-default">LEARN Now</a>
@@ -286,25 +300,29 @@
                             </div>
                             <div class="single-event-text">
                                 <h3><a href="{{url('event-details/'.$event->page_url)}}">
-                                    @php if(strlen($event->title) > 20){
-                                     echo substr($event->title,0,20) . " ...";
+                                    @php 
+                                    if(strlen($event->title) > 20){
+                                     echo substr($event->title,0,20)."...";
                                     }
                                     else{
                                         echo $event->title;
-                                    } @endphp
+                                    } 
+                                    @endphp
                                 </a></h3>
                                 <div class="single-item-comment-view">
                                    <span><i class="zmdi zmdi-time"></i>{{date('h:i A',strtotime($event->from_time))}} &nbsp; {{date('h:i A',strtotime($event->to_time))}}</span>
                                    <span><i class="zmdi zmdi-pin"></i>{{$event->address}}</span>
                                </div>
-                               <p>@php
-                                    if(strlen($event->description) > 95){
-                                        echo substr($event->description,0,85) . " ...";
-                                    }
-                                    else{
-                                        echo $event->description;
-                                    }
-                                @endphp</p>
+                               <p>
+                                    @php
+                                        if(strlen(strip_tags($event->description)) > 85){
+                                            echo substr(strip_tags($event->description),0,85) . " ...";
+                                        }
+                                        else{
+                                            echo strip_tags($event->description);
+                                        }
+                                    @endphp
+                                </p>
                                <a class="button-default" href="{{url('event-details/'.$event->page_url)}}">LEARN Now</a>
                             </div>
                         </div>

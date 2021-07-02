@@ -37,6 +37,9 @@ Route::get('registration', 'HomeController@registration'); //url change
 Route::get('student-registration', 'HomeController@registration');
 Route::post('registrationAction', 'HomeController@registrationAction');
 
+//campus url
+Route::get('campus/{url}', 'HomeController@showCampus');
+
 //registration from home page
 Route::post('student-registration', 'HomeController@studentRegistration');
 Route::get('registration-form', 'HomeController@registrationForm');
@@ -80,6 +83,8 @@ Route::get('download-links', 'HomeController@downloads');
 
 Route::get('terms-conditions', 'HomeController@termsConditions');
 Route::get('privacy-policy', 'HomeController@privacyPolicy');
+Route::get('faqs', 'HomeController@faqs');
+Route::get('about-us', 'HomeController@aboutUs');
 
 Route::group([ 'prefix' => 'admin', 'middleware' => 'AdminMiddleware' ],function (){
 	Route::get('dashboard', 'Admin\HomeController@index');
@@ -164,6 +169,19 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'AdminMiddleware' ],function
 	Route::resource('inquiries','Admin\InquiriesController');
 	Route::get('inquiries/show/{id}','Admin\InquiriesController@show');
 	Route::get('inquiries-destroy/{id}', 'Admin\InquiriesController@destroy');
+
+    //Campus
+	Route::resource('campus','Admin\CampusController');
+	Route::get('campus/edit/{id}','Admin\CampusController@edit');
+	Route::post('campus-update','Admin\CampusController@update');
+	Route::get('campus/show/{id}','Admin\CampusControllerCampusController@show');
+	Route::get('campus-destroy/{id}', 'Admin\CampusController@destroy');
+
+	//logo  
+    Route::resource('logo','Admin\LogoController');
+	Route::get('logo/edit/{id}','Admin\LogoController@edit');
+	Route::post('logo-update','Admin\LogoController@update');
+	Route::get('logo-destroy/{id}', 'Admin\LogoController@destroy');
 
 });
 

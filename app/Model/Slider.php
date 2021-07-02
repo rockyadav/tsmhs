@@ -15,7 +15,7 @@ class Slider extends Model
     {
         
         $savedata = new Slider();
-        $savedata->title     = $data['title'];
+        $savedata->campus_id     = $data['campus'];
 
         if (isset($data['image'])) {
             $file = Input::file('image');
@@ -36,7 +36,7 @@ class Slider extends Model
     public static function updateData($id,$data)
     {   
         $savedata = Slider::find($id);
-        $savedata->title     = $data['title'];
+        $savedata->campus_id     = $data['campus'];
 
         $oldimg = $savedata->image;
 
