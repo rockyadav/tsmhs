@@ -1,5 +1,5 @@
 @extends('layouts.adminTemplate')
-@section('page-title', 'Add Slider')
+@section('page-title', 'Add Logo')
 @section('content')
 
 <div class="content">
@@ -11,15 +11,14 @@
 
 </style>
 @include('layouts.error-sucess-messages')
-
  <div class="container-fluid">
      <div class="row"> 
       <div class="col-md-12">
              <div class="card">
                     <div class="back-btn text-right">
-                        <a class="btn btn-rose btn-fill" href="{{ url('admin/slider') }}">Back<div class="ripple-container"></div></a>
+                        <a class="btn btn-rose btn-fill" href="{{ url('admin/logo') }}">Back<div class="ripple-container"></div></a>
                     </div>
-                <form method="post" action="{{route('slider.store')}}" enctype="multipart/form-data" id="edit-form">
+                <form method="post" action="{{route('logo.store')}}" enctype="multipart/form-data" id="edit-form">
                      {{ csrf_field() }}
                      <div class="card-content">
                         <div class="row">
@@ -45,7 +44,7 @@
                                  </div>
                             </div>
                              <div class="col-md-6"> <br>
-                                 <label class="col-sm-3 label-on-left">Image</label>
+                                 <label class="col-sm-3 label-on-left">Logo</label>
                                 <div class="card-profile" style="text-align: left;">
                                         <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                             <div class="fileinput-new thumbnail">
@@ -54,9 +53,9 @@
                                             <div class="fileinput-preview fileinput-exists thumbnail " style="height: 100px; width: 135px;"></div>
                                             <div class="change-img-btn">
                                                 <span class="btn btn-primary btn-round btn-file">
-                                                    <span class="fileinput-new">Upload image</span>
+                                                    <span class="fileinput-new">Upload Logo</span>
                                                     <span class="fileinput-exists">Change</span> 
-                                                    <input type="file" name="image" accept="image/*" id="upload"  onchange="return ValidateFileUpload()" required="" />
+                                                    <input type="file" name="logo" accept="image/*" id="upload"  onchange="return ValidateFileUpload()" required="" />
                                                 </span>
                                                 <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                             </div>

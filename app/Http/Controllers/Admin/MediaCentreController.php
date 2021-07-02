@@ -17,40 +17,57 @@ class MediaCentreController extends Controller
      */
     public function index()
     {   
-
+        $hide = 0;
         $type = 0;
         if(isset($_GET['type']))
         {
             $type = $_GET['type'];
         }
 
-        $res = MediaCentre::where('status',1);
+        $campus = 0;
+        if(isset($_GET['campus']))
+        {
+            $campus = $_GET['campus'];
+        }
+
+        $res = MediaCentre::where('media_centres.status',1);
+        $res->join('campuses','campuses.id','=','media_centres.campus_id');
         if($type>0)
         { 
            if($type==1){
-                $res->where('type','image');
+                $hide = 1;
+                $res->where('media_centres.type','image');
             }elseif($type==2) {
-                 $res->where('type','video');
+                 $hide = 1;
+                 $res->where('media_centres.type','video');
             }else{
-               $res->where('status',1);
+               $res->where('media_centres.status',1);
             }
 
         }
-
-        $result = $res->orderBy('id', 'desc')->paginate(25); 
+        if($campus>0)
+        { 
+           if($campus!='all'){
+                $res->where('campuses.id',$campus);
+            }
+        }
+        $result = $res->orderBy('media_centres.id', 'desc')->select('media_centres.*','campuses.name')->paginate(25); 
         $data['list']   = $result;
+        $data['hide']   = $hide;
+        $data['campuses'] = DB::table('campuses')->where('status',1)->get();
         return view('admin.media-centre.list',compact('data'));
     }
 
      public function create()
     {
-         return view('admin.media-centre.add');
+         $data['campuses'] = DB::table('campuses')->where('status',1)->get();
+         return view('admin.media-centre.add',compact('data'));
     }
 
     public function store(Request $request)
     {
         $validator  =  Validator::make($request->all(), [
-         // 'title'   => 'required',
+          'campus'  => 'required',
           'type'    => 'required',
           'image'   => 'nullable|mimes:jpeg,jpg,png'     
         ]);
@@ -69,15 +86,6 @@ class MediaCentreController extends Controller
             $response['msg']=rtrim($valErrors,', ');
             return $response; 
         }
-
-       /* $check = MediaCentre::where(['title'=>$request['title'],'status'=>1])->first();
-        
-        if(!empty($check)){
-            $response['status']='error';
-            $response['msg']='Title already exist';
-            return $response; 
-        }*/
-
       
         $insert_data = MediaCentre::saveData($request->all());
         if($insert_data==1)
@@ -111,6 +119,7 @@ class MediaCentreController extends Controller
     public function edit($id)
     {
         $data['detail'] = MediaCentre::where('id',$id)->first();
+        $data['campuses'] = DB::table('campuses')->where('status',1)->get();
         return view('admin.media-centre.edit',compact('data'));
     }
 
@@ -125,7 +134,7 @@ class MediaCentreController extends Controller
     {
 
         $validator  =  Validator::make($request->all(), [
-          //'title'   => 'required', 
+          'campus'   => 'required', 
           'type'    => 'required', 
           'image'   => 'nullable|mimes:jpeg,jpg,png'     
          
@@ -146,14 +155,6 @@ class MediaCentreController extends Controller
             $response['msg']=rtrim($valErrors,', ');
             return $response; 
         }
-
-       /* $check = MediaCentre::where(['title'=>$request['title'],'status'=>1])->first();
-        
-        if(!empty($check) && $check->id!=$id){
-            $response['status']='error';
-            $response['msg']='Title already exist';
-            return $response; 
-        }*/
         
         $update_data = MediaCentre::updateData($id,$request->all());
         if($update_data==1)

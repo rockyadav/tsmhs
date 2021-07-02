@@ -3,6 +3,7 @@ namespace App\Helpers;
 use App\Model\Student_Results;
 use App\Model\Student_Answers;
 use App\User;
+use App\Model\Campus;
 use DB;
 use Auth;
 class Helper
@@ -13,6 +14,12 @@ public static function getTableRow($tablename="",$arrayid="")
     ->where($arrayid)
     ->first();
     return $row; 
+} 
+
+public static function getCampus()
+{
+    $result = Campus::where('status',1)->get();
+    return $result; 
 } 
 
 public static function getTableResultArray($tablename="",$arrayid="")

@@ -42,15 +42,22 @@
                          <div class="row"> 
                           <input type="hidden" name="rowId" required="" value="{{$data['detail']->id}}">
 
-                             <div class="col-md-6">
-                                <label class="col-sm-3 label-on-left">Title</label>
-                                 <div class="col-sm-9">
+                            <div class="col-md-6">
+                                <label class="col-sm-4 label-on-left">Select Campus</label>
+                                 <div class="col-sm-8">
                                      <div class="form-group label-floating is-empty">
                                          <label class="control-label"></label>
-                                         <input type="text"  class="form-control" name="title" placeholder="Enter Title" value="{{$data['detail']->title}}">
-                                         @if ($errors->has('title'))
+                                         <select name="campus" id="campus" class="form-control" required>
+                                            <option value=""> Select Campus</option>
+                                              @if(count($data['campuses'])>0)
+                                                @foreach($data['campuses'] as $camp)
+                                                    <option value="{{$camp->id}}"  @if($data['detail']->campus_id==$camp->id)selected @endif>{{$camp->name}}</option>
+                                                @endforeach
+                                              @endif
+                                        </select>
+                                         @if ($errors->has('campus'))
                                              <span class="error-block">
-                                            <strong>{{ $errors->first('title') }}</strong>
+                                            <strong>{{ $errors->first('campus') }}</strong>
                                             </span>
                                          @endif
                                      </div>

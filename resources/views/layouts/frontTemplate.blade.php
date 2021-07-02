@@ -9,7 +9,7 @@
 
 <!-- favicon
 ============================================ -->        
-<link rel="shortcut icon" type="image/x-icon" href="{{url('public/front-assets/img/favicon.ico')}}">
+<link rel="shortcut icon" type="image/x-icon" href="{{url('public/front-assets/img/favicon.png')}}">
 
 <!-- Google Fonts
 ============================================ -->        
@@ -138,20 +138,24 @@
                                         @endif 
                                         </ul>
                                     </li>
+                                    @php
+                                        $campus = Helper::getCampus();
+                                    @endphp
                                     <li><a href="javascript:;">Campuses</a>
                                         <ul class="sub-menu large">
+                                            @if(count($campus)>0)
+                                            @foreach($campus as $camp)
+                                            @if($camp->page_url=='nairobi')
                                             <li>
-                                                <a href="javascript:;">Kitui</a>
+                                                <a href="{{url('/')}}">{{$camp->name}}</a>
                                             </li>
+                                            @else
                                             <li>
-                                                <a href="javascript:;">Nairobi</a>
+                                                <a href="{{url('campus/'.$camp->page_url)}}">{{$camp->name}}</a>
                                             </li>
-                                            <li>
-                                                <a href="javascript:;">Kisumu</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:;">Mombasa</a>
-                                            </li>
+                                            @endif
+                                            @endforeach
+                                            @endif
                                         </ul>
                                     </li>
                                     <li><a href="javascript:;">Happenings</a>
@@ -205,18 +209,19 @@
                                 </li>
                                 <li><a href="javascript:;">Campuses</a>
                                     <ul class="sub-menu large">
+                                        @if(count($campus)>0)
+                                        @foreach($campus as $camp)
+                                        @if($camp->page_url=='nairobi')
                                         <li>
-                                            <a href="javascript:;">Kitui</a>
+                                            <a href="{{url('/')}}">{{$camp->name}}</a>
                                         </li>
+                                        @else
                                         <li>
-                                            <a href="javascript:;">Nairobi</a>
+                                            <a href="{{url('campus/'.$camp->page_url)}}">{{$camp->name}}</a>
                                         </li>
-                                        <li>
-                                            <a href="javascript:;">Kisumu</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">Mombasa</a>
-                                        </li>
+                                        @endif
+                                        @endforeach
+                                        @endif
                                     </ul>
                                 </li>
                                 <li><a href="javascript:;">Happenings</a>
@@ -269,7 +274,7 @@
                 <h3>Useful Link</h3>
                 <ul class="footer-list">
                     <li><a href="{{url('news')}}">News</a></li>
-                    <li><a href="{{url('download-links')}}">Download Link</a></li>
+                    <li><a href="{{url('faqs')}}">Faqs</a></li>
                     <li><a href="{{url('privacy-policy')}}">Privacy Policy</a></li>
                     <li><a href="{{url('terms-conditions')}}">Terms &amp; Conditions</a></li>
                 </ul>

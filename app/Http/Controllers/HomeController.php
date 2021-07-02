@@ -14,6 +14,7 @@ use App\Model\Department;
 use App\Model\News;
 use App\Model\Facilities;
 use App\Model\Events;
+use App\Model\Campus;
 use App\Model\Courses;
 use App\Model\MediaCentre;
 use App\Model\ContactUs;
@@ -40,10 +41,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        $data['sliders'] = Slider::getData();
-        $data['departments'] = Department::paginate(3);
-        $data['news'] = News::paginate(3);
-        $data['events'] = Events::paginate(3);
+        $data['sliders'] = Slider::where(['campus_id'=>2,'status'=>1])->orderBy('id','desc')->get();
+        $data['departments'] = Department::where('status',1)->paginate(3);
+        $data['news'] = News::where('status',1)->orderBy('news_date','desc')->paginate(3);
+        $data['events'] = Events::where('status',1)->orderBy('event_date','desc')->paginate(3);
         $data['grade'] = Cluster_requirement::where('status',1)->groupBy('grade')->orderBy('grade','asc')->get();
         $data['category'] = Categories::orderBy('name','asc')->get();
         $data['courses'] = array(); 
@@ -103,7 +104,7 @@ class HomeController extends Controller
 
     public function news()
     {  
-       $data['news'] =  News::where('status',1)->paginate(10);
+       $data['news'] =  News::where('status',1)->orderBy('news_date','desc')->paginate(10);
        return view('front.news',compact('data'));
     }
 
@@ -113,7 +114,7 @@ class HomeController extends Controller
                 ->first();
  
        $data['related_news'] =  News::where('page_url','!=',$cpage_url)
-                                        ->orderBy('id','desc')
+                                        ->orderBy('news_date','desc')
                                         ->where('status',1)
                                         ->limit(5)
                                         ->get();
@@ -123,7 +124,7 @@ class HomeController extends Controller
 
     public function events()
     {  
-       $data['events'] =  Events::where('status',1)->paginate(10);
+       $data['events'] =  Events::where('status',1)->orderBy('event_date','desc')->paginate(10);
        return view('front.events',compact('data'));
     }
 
@@ -133,7 +134,7 @@ class HomeController extends Controller
                 ->first();
  
        $data['related_event'] =  Events::where('page_url','!=',$page_url)
-                                        ->orderBy('id','desc')
+                                        ->orderBy('event_date','desc')
                                         ->where('status',1)
                                         ->limit(5)
                                         ->get();
@@ -159,13 +160,13 @@ class HomeController extends Controller
 
     public function imageGallery()
     {  
-       $data['gallery'] = MediaCentre::where('type','image')->where('status',1)->get();
+       $data['gallery'] = MediaCentre::where(['type'=>'image','campus_id'=>2])->where('status',1)->get();
        return view('front.image-gallery',compact('data'));
     }
 
     public function videoGallery()
     {  
-       $data['videos'] = MediaCentre::where('type','video')->where('status',1)->get();
+       $data['videos'] = MediaCentre::where(['type'=>'video','campus_id'=>2])->where('status',1)->get();
        return view('front.video-gallery',compact('data'));
     }
 
@@ -185,9 +186,20 @@ class HomeController extends Controller
        return view('front.privacy-policy');
     }
 
+    public function faqs()
+    {  
+       return view('front.faqs');
+    }
+
+    public function aboutUs()
+    {  
+       return view('front.about-us');
+    }
+
     public function contactUs()
-    {
-        return view('front.contact-form');
+    { 
+        $data['campus'] = Campus::where('status',1)->get();
+        return view('front.contact-form',compact('data'));
     }
 
     public function loginRegister()
@@ -524,5 +536,18 @@ class HomeController extends Controller
         return view('front.registration', compact('title','country','state','courses','grade','category','hide'));
     }
 
+    public function showCampus($url)
+    {
+        $campus = Campus::where(['page_url'=>$url,'status'=>1])->first();
+        if(!empty($campus))
+        {
+            $data['sliders'] = Slider::where(['campus_id'=>$campus->id,'status'=>1])->orderBy('id','desc')->get();
+            $data['gallery'] = MediaCentre::where(['type'=>'image','campus_id'=>$campus->id])->where('status',1)->get();
+            $data['name'] = $campus->name;
+            return view('front.campus-page',compact('data'));
+        }else{
+            return back()->with('error','Campus not found');
+        }
+    }
     /* end of class*/
 }

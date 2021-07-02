@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{url('public/front-assets/img/favicon.png')}}">
     <link rel="apple-touch-icon" sizes="76x76" href="{{url('public/assets/image/apple-icon1.png')}}" />
     <link rel="icon" type="image/png" href="{{url('public')}}/assets/image/new_logo.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />  
@@ -144,16 +145,26 @@
                 $page = Request::segment(2);
                @endphp
                 <ul class="nav navmenu">
-                    <li class="@if($page=='dashboard') active @endif">
-                        <a href="{{url('admin/dashboard')}}">
-                            <i class="material-icons">dashboard</i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-
-
+                  <li class="@if($page=='dashboard') active @endif">
+                    <a href="{{url('admin/dashboard')}}">
+                        <i class="material-icons">dashboard</i>
+                        <p>Dashboard</p>
+                    </a>
+                 </li>
                   
                @if(Auth::user()->role==1)
+                    <li class="@if($page=='campus') active @endif">
+                        <a href="{{url('admin/campus')}}">
+                            <i class="material-icons">dashboard</i>
+                            <p>Campus</p>
+                        </a>
+                    </li>
+                    <li class="@if($page=='logo') active @endif">
+                        <a href="{{url('admin/logo')}}">
+                            <i class="material-icons">dashboard</i>
+                            <p>Logo</p>
+                        </a>
+                    </li>
                     <li class="@if($page=='courses') active @endif">
                         <a href="{{url('admin/courses')}}">
                             <i class="material-icons">dashboard</i>

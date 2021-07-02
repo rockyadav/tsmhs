@@ -34,19 +34,32 @@
                                 </a>
                             </div>
                             <div class="single-event-text">
-                                <h3><a href="{{url('event-details/'.$event->page_url)}}">{{$event->title}}</a></h3>
+                                <h3>
+                                    <a href="{{url('event-details/'.$event->page_url)}}">
+                                    @php 
+                                    if(strlen($event->title) > 20){
+                                     echo substr($event->title,0,20)."...";
+                                    }
+                                    else{
+                                        echo $event->title;
+                                    } 
+                                    @endphp
+                                    </a>
+                                </h3>
                                 <div class="single-item-comment-view">
                                    <span><i class="zmdi zmdi-time"></i>{{date('h:i A',strtotime($event->from_time))}} &nbsp; {{date('h:i A',strtotime($event->to_time))}}</span>
                                    <span><i class="zmdi zmdi-pin"></i>{{$event->address}}</span>
                                </div>
-                               <p>@php
-                                    if(strlen($event->description) > 200){
-                                        echo substr($event->description,0,200) . " ...";
-                                    }
-                                    else{
-                                        echo $event->description;
-                                    }
-                                @endphp</p>
+                                <p>
+                                    @php
+                                        if(strlen(strip_tags($event->description)) > 85){
+                                            echo substr(strip_tags($event->description),0,85) . " ...";
+                                        }
+                                        else{
+                                            echo strip_tags($event->description);
+                                        }
+                                    @endphp
+                                </p>
                                <a class="button-default" href="{{url('event-details/'.$event->page_url)}}">LEARN Now</a>
                             </div>
                         </div>

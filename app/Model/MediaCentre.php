@@ -14,10 +14,10 @@ class MediaCentre extends Model
     public static function saveData($data)
     {
         
+        $type                   = $data['type'];
         $savedata = new MediaCentre();
-        $savedata->title     = $data['title'];
-        $type= $data['type'];
-        $savedata->type = $type;
+        $savedata->campus_id    = $data['campus'];
+        $savedata->type         = $type;
 
         if($type=='image'){
 
@@ -45,11 +45,11 @@ class MediaCentre extends Model
 
     public static function updateData($id,$data)
     {   
-       
-        $savedata = MediaCentre::find($id);
-        $savedata->title     = $data['title'];
-        $type= $data['type'];
-        $savedata->type = $type;
+        
+        $type                   = $data['type'];
+        $savedata               = MediaCentre::find($id);
+        $savedata->campus_id    = $data['campus'];
+        $savedata->type         = $type;
 
         if($type=='image'){
 

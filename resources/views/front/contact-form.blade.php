@@ -23,22 +23,14 @@
 <div class="contact-form-area section-padding">
     <div class="container">
         <div class="row contact-address">
-            <div class="col-lg-3 col-12 contact-address-sedow">
-                <h3>Kitui Campus</h3>
-                <p>Physical location: Located at site estate opposite Kitui District Hospital 0708241018,0723991866<br> Post Address: 429-01000 Thika, Kenya <br>Email Address: kituicampus@tsmhs.ac.ke</p>
-            </div>
-            <div class="col-lg-3 col-12 contact-address-sedow">
-                <h3>Nairobi Campus</h3>
-                <p>Physical location: 12th Floor Bazaar Building Moi Avenue Nairobi CBD <br>Postal address : 429-01000 Thika <br>Phone number : 0708241019, 0723991866 <br>Email address : nairobicampus@tsmhs.ac.ke</p>
-            </div>
-            <div class="col-lg-3 col-12 contact-address-sedow">
-                <h3>Kisumu Campus</h3>
-                <p>Physical location: Telephone house 2nd & 3rd floor, Oginga Odinga street opp. Jomo Kenyatta Sports ground.<br>Phone Number: 0704521359, 0723991866 <br>Postal Address: 429-01000 Thika, Kenya <br>Email Address: kisumucampus@tsmhs.ac.ke</p>
-            </div>
-            <div class="col-lg-3 col-12 contact-address-sedow">
-                <h3>Mombasa Campus</h3>
-                <p>Physical location: Located at Bamburi Mwisho <br>Postal address : 429-01000 Thika <br>Phone Number :0717310141 , 0723991866 <br>Email address : mombasacampus@tsmhs.ac.ke</p>
-            </div>
+            @if(count($data['campus'])>0)
+                @foreach($data['campus'] as $camp)
+                <div class="col-lg-3 col-12 contact-address-sedow">
+                    <h3>{{$camp->name}}</h3>
+                    <p>{!!$camp->address!!}</p>
+                </div>
+                @endforeach
+            @endif
         </div>
     </div>
     <div class="container">

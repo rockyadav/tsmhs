@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\User;
-use App\Model\Slider;
+use App\Model\Logo;
 use Validator;
 use Auth;
 use DB;
 
-class SliderController extends Controller
+class LogoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,31 +23,31 @@ class SliderController extends Controller
             $campus = $_GET['campus'];
         }
 
-        $res = Slider::where('sliders.status',1);
-        $res->join('campuses','campuses.id','=','sliders.campus_id');
+        $res = Logo::where('logos.status',1);
+        $res->join('campuses','campuses.id','=','logos.campus_id');
         if($campus>0)
         { 
            if($campus!='all'){
                 $res->where('campuses.id',$campus);
             }
         }
-        $result = $res->orderBy('sliders.id', 'desc')->select('sliders.*','campuses.name')->paginate(25); 
+        $result = $res->orderBy('logos.id', 'desc')->select('logos.*','campuses.name')->paginate(25); 
         $data['list']   = $result;
         $data['campuses'] = DB::table('campuses')->where('status',1)->get();
-        return view('admin.slider.list',compact('data'));
+        return view('admin.logo.list',compact('data'));
     }
 
     public function create()
     {
         $data['campuses'] = DB::table('campuses')->where('status',1)->get();
-        return view('admin.slider.add',compact('data'));
+        return view('admin.logo.add',compact('data'));
     }
 
     public function store(Request $request)
     {
         $validator  =  Validator::make($request->all(), [
           'campus' => 'required',
-          'image'  => 'required|mimes:jpeg,jpg,png'
+          'logo'  => 'required|mimes:png'
         ]);
 
          $response = array();
@@ -64,9 +64,8 @@ class SliderController extends Controller
             $response['msg']=rtrim($valErrors,', ');
             return $response; 
         }
-
        
-        $insert_data = Slider::saveData($request->all());
+        $insert_data = Logo::saveData($request->all());
         if($insert_data==1)
         {
             $response['status']='success';
@@ -97,9 +96,9 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        $data['detail'] = Slider::where('id',$id)->first();
+        $data['detail'] = Logo::where('id',$id)->first();
         $data['campuses'] = DB::table('campuses')->where('status',1)->get();
-        return view('admin.slider.edit',compact('data'));
+        return view('admin.logo.edit',compact('data'));
     }
 
     /**
@@ -114,7 +113,7 @@ class SliderController extends Controller
 
         $validator   =  Validator::make($request->all(), [
           'campus' => 'required',
-          'image'  => 'nullable|mimes:jpeg,jpg,png' 
+          'logo'  => 'nullable|mimes:png' 
         ]);
 
         $id = $request['rowId'];
@@ -133,7 +132,7 @@ class SliderController extends Controller
             return $response; 
         }
         
-        $update_data = Slider::updateData($id,$request->all());
+        $update_data = Logo::updateData($id,$request->all());
         if($update_data==1)
         {
             $response['status']='success';
@@ -151,17 +150,17 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-   public function destroy($id)
+    public function destroy($id)
     {        
       
-        $slider = Slider::where('id', $id)->first();
+        $logo = Logo::where('id', $id)->first();
 
-        if($slider->image!="")
+        if($logo->logo!="")
         {
-            unlink('public/images/slider/'.$slider->image);
+            unlink('public/images/logos/'.$logo->logo);
         }   
 
-        $data =Slider::where('id', $id)->delete();
+        $data =Logo::where('id', $id)->delete();
 
         if($data){
           echo "success";

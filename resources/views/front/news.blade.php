@@ -28,21 +28,34 @@
 	            <div class="col-lg-6 col-md-12 col-12">
 	                <div class="single-latest-item">
 	                    <div class="single-latest-image">
-	                        <a href="{{url('news-details/'.$newss->page_url)}}"><img src="{{ url('public/images/news/'.$newss->image) }}" alt="" style="width:236px; height: 234px;"></a>
+	                        <a href="{{url('news-details/'.$newss->page_url)}}"><img src="{{ url('public/images/news/'.$newss->image) }}" alt="" style="width:236px; height: 212px;"></a>
 	                    </div>
 	                    <div class="single-latest-text">
-	                        <h3><a href="{{url('news-details/'.$newss->page_url)}}">{{$newss->title}}</a></h3>
+	                        <h3>
+	                        	<a href="{{url('news-details/'.$newss->page_url)}}">
+	                        	@php 
+	                            if(strlen($newss->title) > 22){
+	                             echo substr($newss->title,0,22)."...";
+	                            }
+	                            else{
+	                                echo $newss->title;
+	                            } 
+	                            @endphp
+		                        </a>
+		                    </h3>
 	                        <div class="single-item-comment-view">
 	                           <span><i class="zmdi zmdi-calendar-check"></i>{{date('d M Y',strtotime($newss->news_date))}}</span>
 	                       </div>
-	                       <p>@php
-	                            if(strlen($newss->description) > 200){
-	                                echo substr($newss->description,0,200) . " ...";
-	                            }
-	                            else{
-	                                echo $newss->description;
-	                            }
-	                        @endphp</p>
+	                       <p>
+	                       		@php
+		                            if(strlen(strip_tags($newss->description)) > 85){
+		                                echo substr(strip_tags($newss->description),0,85) . " ...";
+		                            }
+		                            else{
+		                                echo strip_tags($newss->description);
+		                            }
+		                        @endphp
+		                    </p>
 	                       <a href="{{url('news-details/'.$newss->page_url)}}" class="button-default">LEARN Now</a>
 	                    </div>
 	                </div>

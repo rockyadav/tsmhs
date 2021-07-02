@@ -1,14 +1,12 @@
 @extends('layouts.adminTemplate')
-@section('page-title','Media Centre')
+@section('page-title','Logo')
 @section('content')
 
 <style>
-
 .rimg{ 
   height : 50px!important;
   width : 50px!important ;
 }
-
 </style>
 
 <div class="content">
@@ -20,23 +18,17 @@
                 <div class="card-header card-header-icon" data-background-color="green">
                    <i class="material-icons">account_circle</i>
                 </div>
-                 <?php
-                        $type ='3';
-                        if(isset($_GET['type']))
-                        {
-                            $type = $_GET['type'];
-                        }
-
-                        $campus ='';
-                        if(isset($_GET['campus']))
-                        {
-                            $campus = $_GET['campus'];
-                        }
-                    ?>
+                <?php
+                    $campus ='';
+                    if(isset($_GET['campus']))
+                    {
+                        $campus = $_GET['campus'];
+                    }
+                ?>
                 <div class="card-content">
-                    <h4 class="card-title">Media Centre</h4>
+                    <h4 class="card-title">Logo</h4>
                     <div class="toolbar">
-                         <form>
+                        <form>
                             <div class="text-center">
                                 <label>Filter</label>
                                 <select name="campus" id="campus">
@@ -47,29 +39,22 @@
                                         @endforeach
                                       @endif
                                 </select>
-                                <select name="type" id="type">
-                                    <option value=""> Choose Type</option>
-                                      <option value="1"  @if($type==1) selected @endif>Image</option>
-                                      <option value="2" @if($type==2) selected @endif>Video Link</option>
-                                      <option value="3" @if($type==3) selected @endif>All</option>
-                                </select>
                                 <button type="submit" class="btn btn-fill btn-sm">Search</button>
-                                <a href="{{url('admin/media-centre')}}"><button type="button" class="btn btn-fill btn-sm">Clear</button></a>
+                                <a href="{{url('admin/logo')}}"><button type="button" class="btn btn-fill btn-sm">Clear</button></a>
                             </div>
                         </form>
                     </div>
                     <div class="material-datatables">
                         <div class="add-more text-right">
-                            <a class="btn btn-rose btn-fill" href="{{route('media-centre.create')}}" style="margin: -66px 15px 0;">Add<div class="ripple-container"></div></a>
+                            <a class="btn btn-rose btn-fill" href="{{route('logo.create')}}" style="margin: -66px 15px 0;">Add<div class="ripple-container"></div></a>
                         </div>
                         <div class="table-responsive">
                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>SNO</th>
-                                    <th>Media</th>
+                                    <th>Logo</th>
                                     <th>Campus</th>
-                                    <th>Type</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -84,21 +69,13 @@
                                 @endphp
                                 <tr>
                                 <td>{{$i}}</td>
-                               @if($row->type=='image')
-                                <td style="width:150px;"> 
-                                    @if($row->image != '')
-                                    <img class="tem-img"  src="{{ url('public/images/media-centre/'.$row->image) }}"  alt="image" class="img" style="width: 250px; height:150px;">
+                                <td style="width:150px;"> @if($row->logo != '')
+                                    <img class="tem-img"  src="{{ url('public/images/logos/'.$row->logo) }}"  alt="logo" class="img" style="width:80px; height: 80px;">
                                     @endif
                                 </td>
-                                @else
-                                <td>
-                                    <iframe width="250px" height="150px" src="{{$row->video_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </td>
-                                @endif
                                 <td>{{$row->name}}</td>
-                                <td>{{$row->type}}</td>
                                 <td class="td-actions">
-                                        <a href="{{url('admin/media-centre/edit/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-success">
+                                        <a href="{{url('admin/logo/edit/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-success">
                                             <i class="material-icons">edit</i>
                                         </button></a>
                                         <a href="javascript:void(0);" onclick="deleteMyData('{{$row->id}}');">
@@ -118,9 +95,7 @@
                             </tbody>
                         </table>
                         </div>
-                        @if($data['hide'])
-                            <div class="text-center">{{$data['list']->links()}}</div>
-                        @endif
+                        <div class="text-center">{{$data['list']->links()}}</div>
                     </div>
                 </div>
                 <!-- end content-->
@@ -147,7 +122,7 @@ function deleteMyData(id)
     }).then(function() {
 
         $.ajax({
-                url: base_url+'/admin/media-centre-destroy/'+id,
+                url: base_url+'/admin/logo-destroy/'+id,
                 method:"get",
             success:function(data)
             {
