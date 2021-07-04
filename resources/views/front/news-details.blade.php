@@ -33,6 +33,9 @@
 							   <span><i class="zmdi zmdi-calendar-check"></i>{{date('d M Y',strtotime($data['news']->news_date))}}</span>
 							</div>
 							<p>{!!$data['news']->description!!}</p>
+							@if($data['news']->link_title!='' && $data['news']->link_file!='')
+								<h6 style="margin-bottom: 20px;"><a href="{{url('public/images/news/'.$data['news']->link_file)}}" target="_blank" style="color: #E67E22;">{{$data['news']->link_title}}</a></h6>
+							@endif
 						</div>
 					</div>
 				</div>    
@@ -40,7 +43,7 @@
 			<div class="col-lg-3 col-md-12 col-12">
 				<div class="sidebar-widget">
 					<div class="single-sidebar-widget">
-						<h4 class="title">Recent Posts</h4>
+						<h4 class="title">Recent News</h4>
 						<div class="recent-content">
 							@if(count($data['related_news'])>0)
                             @foreach($data['related_news'] as $rnews)

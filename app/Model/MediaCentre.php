@@ -34,6 +34,12 @@ class MediaCentre extends Model
         }
     }elseif ($type=='video') {
        $savedata->video_link= $data['video_link'];
+
+          if (isset($data['video_link'])) { 
+            error_reporting(0);
+            $v = explode('v=', $data['video_link']);
+            $savedata->video_id     = $v[1];
+          }
     }  
 
 
@@ -71,6 +77,11 @@ class MediaCentre extends Model
             }
         }elseif ($type=='video') {
            $savedata->video_link= $data['video_link'];  
+           if (isset($data['video_link'])) { 
+            error_reporting(0);
+            $v = explode('v=', $data['video_link']);
+            $savedata->video_id = $v[1];
+          }
           
         }  
 

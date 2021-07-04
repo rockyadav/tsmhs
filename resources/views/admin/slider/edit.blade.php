@@ -71,10 +71,11 @@
                                             <div class="fileinput-new thumbnail">
                                             @if($data['detail']->image!="")
                                                 <img src="{{ url('public/images/slider/'.$data['detail']->image) }}" style="height: 100px; width: 135px;" alt="..." class="img">
-                                            @else  <img src="{{ url('public/images/image_placeholder.jpg') }}" style="height: 100px; width: 135px;" alt="..." class="img">
+                                            @else  <img src="{{ url('public/images/placeholder.jpg') }}" style="height: 100px; width: 135px;" alt="..." class="img">
                                             @endif
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail " style="height: 100px; width: 135px;"></div>
+                                            <p>(Size : 1920x716)</p>
                                             <div class="change-img-btn">
                                                 <span class="btn btn-primary btn-round btn-file">
                                                     <span class="fileinput-new">Change image</span>

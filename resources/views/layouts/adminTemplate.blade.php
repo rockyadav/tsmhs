@@ -54,6 +54,9 @@
             font-size: 14px;
             font-weight: 400;
         }
+        .thumbnail img {
+            height: 100px !important;
+        }
     </style>
     <script type="text/javascript">
     var App;
@@ -159,12 +162,6 @@
                             <p>Campus</p>
                         </a>
                     </li>
-                    <li class="@if($page=='logo') active @endif">
-                        <a href="{{url('admin/logo')}}">
-                            <i class="material-icons">dashboard</i>
-                            <p>Logo</p>
-                        </a>
-                    </li>
                     <li class="@if($page=='courses') active @endif">
                         <a href="{{url('admin/courses')}}">
                             <i class="material-icons">dashboard</i>
@@ -195,13 +192,12 @@
 
                     @endif
 
-
                     <li class="@if($page=='student') active @endif">
                         <a href="{{url('admin/student')}}">
                             <i class="material-icons">dashboard</i>
-                            <p>Students</p>
+                            <p>Registrations</p>
                         </a>
-             <li class="@if($page=='slider') active @endif">
+                    <li class="@if($page=='slider') active @endif">
                         <a href="{{url('admin/slider')}}">
                             <i class="material-icons">dashboard</i>
                             <p>Slider</p>

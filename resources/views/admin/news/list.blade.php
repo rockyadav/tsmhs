@@ -41,20 +41,24 @@
                             </thead>
                             <tbody>
                               @if(count($data['list'])>0)
-                              @php
-                                $i=0;
-                              @endphp
+                                @php
+                                    $i=0;
+                                    if(isset($_GET['page']))
+                                    {
+                                        $i = (15*$_GET['page'])-15;
+                                    }
+                                @endphp
                                 @foreach($data['list'] as $row)
                                 @php
                                   $i++;
                                 @endphp
                                 <tr>
                                 <td>{{$i}}</td>
-                                <td>{{$row->title}}</td>
                                 <td> @if($row->image!= '')
                                     <img class="tem-img"  src="{{ url('public/images/news/'.$row->image) }}"  alt="image" class="img" style="width: 80px; height: 80px">
                                     @endif
                                 </td>
+                                <td>{{$row->title}}</td>
                                 <td>{{ date('d-m-Y',strtotime($row->news_date)) }}</td>
                                 <td class="td-actions">
                                        <a href="{{url('admin/news/show/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-warning">

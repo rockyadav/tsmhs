@@ -71,6 +71,7 @@
                                                 <img src="{{ url('public/images/placeholder.jpg') }}" style="height: 100px; width: 135px;" alt="..." class="img">
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail " style="height: 100px; width: 135px;"></div>
+                                            <p>(Size : 300x211)</p>
                                             <div class="change-img-btn">
                                                 <span class="btn btn-primary btn-round btn-file">
                                                     <span class="fileinput-new">Upload image</span>

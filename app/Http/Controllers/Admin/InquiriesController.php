@@ -15,11 +15,37 @@ class InquiriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {  
         $res = ContactUs::where('status',1);
-                $res->orderBy('id','desc');
-                $result = $res->paginate(25); 
+
+        $t_date = '';
+        $f_date = '';
+        if(isset($_GET['f_date']))
+        {
+            $f_date = $_GET['f_date'];
+        }
+
+        if(isset($_GET['t_date']))
+        {
+            $t_date = $_GET['t_date'];
+        }
+
+
+        if($f_date!='')
+        {
+          $f_date = date("Y-m-d",strtotime($f_date));
+          $res->whereDate('inq_date','>=',$f_date);   
+        }
+
+        if($t_date!='')
+        {
+          $t_date = date("Y-m-d",strtotime($t_date));
+          $res->whereDate('inq_date','<=',$t_date);   
+        }
+
+        $res->orderBy('id','desc');
+        $result = $res->paginate(25); 
         $data['list']   = $result;
         return view('admin.inquiries.list',compact('data'));
     }

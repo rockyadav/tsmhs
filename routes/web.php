@@ -169,6 +169,7 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'AdminMiddleware' ],function
 	Route::resource('inquiries','Admin\InquiriesController');
 	Route::get('inquiries/show/{id}','Admin\InquiriesController@show');
 	Route::get('inquiries-destroy/{id}', 'Admin\InquiriesController@destroy');
+	Route::post('inquiries', 'Admin\InquiriesController@index');
 
     //Campus
 	Route::resource('campus','Admin\CampusController');

@@ -45,18 +45,19 @@
                                  </div>
                             </div>
                              <div class="col-md-6"> <br>
-                                 <label class="col-sm-3 label-on-left">Image</label>
+                                 <label class="col-sm-3 label-on-left">Image </label>
                                 <div class="card-profile" style="text-align: left;">
                                         <div class="fileinput fileinput-new text-center" data-provides="fileinput">
                                             <div class="fileinput-new thumbnail">
                                                 <img src="{{ url('public/images/placeholder.jpg') }}" style="height: 100px; width: 135px;" alt="..." class="img">
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail " style="height: 100px; width: 135px;"></div>
+                                            <p>(Size : 1920x716)</p>
                                             <div class="change-img-btn">
                                                 <span class="btn btn-primary btn-round btn-file">
                                                     <span class="fileinput-new">Upload image</span>
-                                                    <span class="fileinput-exists">Change</span> 
-                                                    <input type="file" name="image" accept="image/*" id="upload"  onchange="return ValidateFileUpload()" required="" />
+                                                    <span class="fileinput-exists">Change</span>
+                                                    <input type="file" name="image" accept="image/*" id="upload" required="" />
                                                 </span>
                                                 <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                             </div>

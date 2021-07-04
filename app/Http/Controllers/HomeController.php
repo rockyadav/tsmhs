@@ -97,7 +97,7 @@ class HomeController extends Controller
     public function courseDetail($dpage_url,$cpage_url)
     {   
 
-       $data['cources'] =  Courses::leftjoin('departments','courses.department','=','departments.id')->where('courses.page_url',$cpage_url)->select('courses.*','departments.name as department')->first();
+       $data['cources'] =  Courses::leftjoin('departments','courses.department','=','departments.id')->leftjoin('cluster_requirements','courses.id','=','cluster_requirements.course_id')->where('courses.page_url',$cpage_url)->select('courses.*','departments.name as department','cluster_requirements.grade')->first();
         
        return view('front.course-detail',compact('data'));
     }
@@ -235,6 +235,7 @@ class HomeController extends Controller
           $catdata->message   = trim($request['message']);
           $catdata->mobile    = trim($request['mobile']);
           $catdata->email     = trim($request['email']);
+          $catdata->inq_date  = date('Y-m-d');
 
           $result =  $catdata->save();  
           if($result)
@@ -542,8 +543,10 @@ class HomeController extends Controller
         if(!empty($campus))
         {
             $data['sliders'] = Slider::where(['campus_id'=>$campus->id,'status'=>1])->orderBy('id','desc')->get();
-            $data['gallery'] = MediaCentre::where(['type'=>'image','campus_id'=>$campus->id])->where('status',1)->get();
+            $data['gallery'] = MediaCentre::where(['type'=>'image','campus_id'=>$campus->id])->orderBy('id','desc')->where('status',1)->limit(12)->get();
+            $data['videos'] = MediaCentre::where(['type'=>'video','campus_id'=>$campus->id])->orderBy('id','desc')->where('status',1)->limit(12)->get();
             $data['name'] = $campus->name;
+            $data['campus'] = $campus;
             return view('front.campus-page',compact('data'));
         }else{
             return back()->with('error','Campus not found');

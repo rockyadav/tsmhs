@@ -1526,7 +1526,7 @@ body {
 /*  14.2 Home Two Slider
 /*----------------------------------------*/
 .slider-area.slider-two:after {
-    background: rgba(45, 62, 80, 0.4) none repeat scroll 0 0;
+    background: transparent;
     width: 100%;
     transform: none;
     -webkit-animation: 700ms ease-in-out 0s normal none 1 running slideInLeft;
@@ -2948,4 +2948,8 @@ span.c-text {display: inline-block;}
 .trophy img{
     max-width: 20% !important;
     margin-bottom: 20px !important;
+}
+
+.footer-logo img {
+    background-color: #fff;
 }

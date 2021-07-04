@@ -19,6 +19,7 @@ class News extends Model
         $savedata->title     = $data['title'];
         $savedata->description  = $data['description'];
         $savedata->news_date   = $data['news_date'];
+        $savedata->link_title   = $data['link_title'];
 
         if (isset($data['image'])) {
             $file = Input::file('image');
@@ -32,6 +33,21 @@ class News extends Model
             $savedata->image = $imageName;
         }
 
+        if (isset($data['link_file'])) {
+            $file = Input::file('link_file'); 
+            $fileName = $file->getClientOriginalName(); 
+            $file_extension = $file->extension(); 
+            $path = 'images/news/'.$fileName;
+            if(file_exists($path))
+            {
+                $fileName = time().'-'.$fileName;
+            }
+
+            $destinationPath = public_path('images/news');
+            $file->move($destinationPath, $fileName);
+            $savedata->link_file = $fileName;
+        }
+
         $res = $savedata->save();
         return $res; 
     }
@@ -43,32 +59,50 @@ class News extends Model
        
         $page_url = News::craeteUrl($data['title']);
         $savedata = News::find($id);
-        $savedata->page_url = $page_url;
-        $savedata->title     = $data['title'];
+        $savedata->page_url    = $page_url;
+        $savedata->title       = $data['title'];
         $savedata->description = $data['description'];
-        $savedata->news_date  = $data['news_date'];
+        $savedata->news_date   = $data['news_date'];
+        $savedata->link_title  = $data['link_title'];
 
+        if($savedata->image!="" && isset($data['image']))
+        {  
+            unlink('public/images/news/'.$savedata->image);      
+        }
+        
+        if (isset($data['image'])) {
+           
+            $file = Input::file('image');
+            $imageName = time().'.'.$file->extension();
+            $destinationPath = public_path('images/news');
+            $img = Image::make($file->path());
+           /* $img->resize(300, 300, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$imageName);*/
+            $img->save($destinationPath.'/'.$imageName); 
+            $savedata->image = $imageName;
 
-        $oldimg = $savedata->image;
+        }
 
-          if($savedata->image!="" && isset($data['image']))
-            {  
-             unlink('public/images/news/'.$savedata->image);      
+        if($savedata->link_file!="" && isset($data['link_file']))
+        {  
+            unlink('public/images/news/'.$savedata->link_file);      
+        }
+
+        if (isset($data['link_file'])) {
+            $file = Input::file('link_file'); 
+            $fileName = $file->getClientOriginalName(); 
+            $file_extension = $file->extension(); 
+            $path = 'images/news/'.$fileName;
+            if(file_exists($path))
+            {
+                $fileName = time().'-'.$fileName;
             }
-            
-            if (isset($data['image'])) {
-               
-                $file = Input::file('image');
-                $imageName = time().'.'.$file->extension();
-                $destinationPath = public_path('images/news');
-                $img = Image::make($file->path());
-               /* $img->resize(300, 300, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($destinationPath.'/'.$imageName);*/
-                $img->save($destinationPath.'/'.$imageName); 
-                $savedata->image = $imageName;
 
-            }
+            $destinationPath = public_path('images/news');
+            $file->move($destinationPath, $fileName);
+            $savedata->link_file = $fileName;
+        }
         $res = $savedata->save();
         return $res;  
     }

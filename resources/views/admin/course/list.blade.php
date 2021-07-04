@@ -57,6 +57,7 @@
                                 <tr>
 
                                     <th>SNO</th>
+                                    <th>Image</th>
                                     <th>Name</th>
                                     <th>Category</th>
                                     <th>Duration</th>
@@ -72,15 +73,20 @@
                             <tbody>
 
                               @if(count($data['list'])>0)
-                              @php
-                                $i=0;
-                              @endphp
+                                @php
+                                    $i=0;
+                                    if(isset($_GET['page']))
+                                    {
+                                        $i = (15*$_GET['page'])-15;
+                                    }
+                                @endphp
                                 @foreach($data['list'] as $row)
                               @php
                                 $i++;
                               @endphp
                                 <tr>
                                 <td>{{$i}}</td>
+                                <td><img src="{{url('public/images/courses/'.$row->image)}}" style="height: 100px; width: 135px;" alt="..." class="img"></td>
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->category_name}}</td>
                                 <td>{{$row->duration}}</td>

@@ -14,6 +14,37 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
+             <?php
+                    $f_date ='';
+                    if(isset($_GET['f_date']))
+                    {
+                        $f_date = $_GET['f_date'];
+                    }
+
+                    $t_date ='';
+                    if(isset($_GET['t_date']))
+                    {
+                        $t_date = $_GET['t_date'];
+                    }
+            ?>
+            <div class="col-md-8 col-md-offset-2">
+                <form>
+                  <div class="col-md-4"> 
+                      <div class="input-group">
+                      <input type="date"  name="f_date" value="{{ $f_date }}" class="form-control" placeholder="From date...">
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="input-group"> 
+                      <input type="date" name="t_date" value="{{ $t_date }}" class="form-control" placeholder="To date...">
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <button type="submit"  id="search-btn" class="btn btn-flat"><i class="fa fa-search" ></i></button>
+                      <a href="{{url('admin/inquiries')}}" class="btn btn-flat"><i class="fa fa-refresh" aria-hidden="true"></i></a> 
+                  </div>
+               </form>
+           </div>
             <div class="card">
                 <div class="card-header card-header-icon" data-background-color="green">
                    <i class="material-icons">account_circle</i>

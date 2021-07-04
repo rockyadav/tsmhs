@@ -33,27 +33,31 @@
                             <thead>
                                 <tr>
                                     <th>SNO</th>
-                                    <th>Title</th>
                                     <th>Image</th>
+                                    <th>Title</th>
                                     <th>Event Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                               @if(count($data['list'])>0)
-                              @php
-                                $i=0;
-                              @endphp
+                                @php
+                                    $i=0;
+                                    if(isset($_GET['page']))
+                                    {
+                                        $i = (15*$_GET['page'])-15;
+                                    }
+                                @endphp
                                 @foreach($data['list'] as $row)
                                 @php
                                   $i++;
                                 @endphp
                                 <tr>
                                 <td>{{$i}}</td>
-                                <td>{{$row->title}}</td>
                                 <td> @if($row->image!= '')
                                     <img class="tem-img"  src="{{ url('public/images/events/'.$row->image) }}"  alt="image" class="img" style="width: 80px; height: 80px">
                                     @endif
+                                <td>{{$row->title}}</td>
                                 </td>
                                 <td>{{ date('d-m-Y',strtotime($row->event_date)) }}</td>
                                 <td class="td-actions">
