@@ -60,7 +60,7 @@
                                         }
                                     @endphp
                                 </p>
-                               <a class="button-default" href="{{url('event-details/'.$event->page_url)}}">LEARN Now</a>
+                               <a class="button-default" href="{{url('event-details/'.$event->page_url)}}">Explore More</a>
                             </div>
                         </div>
                     </div>

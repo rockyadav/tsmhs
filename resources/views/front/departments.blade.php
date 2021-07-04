@@ -35,7 +35,7 @@
 						<p>{{$department->description}}</p> 
 					</div>
 					<div class="button-bottom">
-						<a href="{{url('departments/'.$department->page_url)}}" class="button-default">Learn Now</a>
+						<a href="{{url('departments/'.$department->page_url)}}" class="button-default">Explore More</a>
 					</div>
 				</div>
 			</div>

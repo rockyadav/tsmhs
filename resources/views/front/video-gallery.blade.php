@@ -27,7 +27,7 @@
             @foreach($data['videos'] as $video)
             <div class="col-lg-4 col-md-6 mb-30">
                 <div class="gallery-img">
-                   <iframe width="100%" height="200" src="{{$video->video_link}}"frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                   <iframe width="100%" height="200" src="https://www.youtube.com/embed/{{$video->video_id}}?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0"frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
            @endforeach

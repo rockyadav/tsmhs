@@ -19,6 +19,17 @@ class Campus extends Model
         $savedata->page_url = $page_url;
         $savedata->name     = ucwords($data['name']);
         $savedata->address  = $data['address'];
+        $savedata->about_principal  = $data['about_principal'];
+
+         if (isset($data['pimage'])) {
+            $file = Input::file('pimage');
+            $imageName = time().'.'.$file->extension();
+            $destinationPath = public_path('images/management');
+            $img = Image::make($file->path());
+            $img->resize(210, 300);
+            $img->save($destinationPath.'/'.$imageName);
+            $savedata->pimage = $imageName;
+        }
         $res = $savedata->save();
         return $res; 
     }
@@ -29,11 +40,27 @@ class Campus extends Model
        
         $page_url = Campus::craeteUrl($data['name']);
         $savedata = Campus::find($id);
+        $savedata->name     = ucwords($data['name']);
+        $savedata->address  = $data['address'];
+        $savedata->about_principal  = $data['about_principal'];
         if($savedata->id!=2){
         $savedata->page_url = $page_url;   
         }
-        $savedata->name     = ucwords($data['name']);
-        $savedata->address  = $data['address'];
+
+        if($savedata->pimage!="" && isset($data['pimage']))
+            {  
+             unlink('public/images/management/'.$savedata->pimage);      
+            }
+
+         if (isset($data['pimage'])) {
+            $file = Input::file('pimage');
+            $imageName = time().'.'.$file->extension();
+            $destinationPath = public_path('images/management');
+            $img = Image::make($file->path());
+            $img->resize(210, 300);
+            $img->save($destinationPath.'/'.$imageName);
+            $savedata->pimage = $imageName;
+        }
         $res = $savedata->save();
         return $res;  
     }

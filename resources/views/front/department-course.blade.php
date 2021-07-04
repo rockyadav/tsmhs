@@ -33,7 +33,7 @@
 					<div class="single-product-text">
 						<h4 class="course-h4"><a href="{{url('departments/'.$cource->dpage_url.'/'.$cource->page_url)}}">{{$cource->name}}</a></h4>
 						<div class="product-buttons">
-							<a href="{{url('departments/'.$cource->dpage_url.'/'.$cource->page_url)}}"><button type="button" class="button-default cart-btn">Learn Now</button></a>
+							<a href="{{url('departments/'.$cource->dpage_url.'/'.$cource->page_url)}}"><button type="button" class="button-default cart-btn">Explore More</button></a>
 						</div>
 					</div>
 				</div>

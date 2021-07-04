@@ -8,6 +8,15 @@ use App\Model\User_registration;
 use App\User;
 use Auth;
 use DB;
+use App\Model\Department;
+use App\Model\News;
+use App\Model\Facilities;
+use App\Model\Events;
+use App\Model\Campus;
+use App\Model\Courses;
+use App\Model\MediaCentre;
+use App\Model\ContactUs;
+use App\Model\Downloads;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Validator;
@@ -33,9 +42,13 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $title = 'Dashboard';
+        $data['departments'] = Department::where('status',1)->count();
+        $data['courses'] = Courses::where('status',1)->count();
+        $data['news'] = News::where('status',1)->count();
+        $data['register'] = User::where(['status'=>1,'role'=>2,'register_step'=>2])->count();
+        $data['inquiries'] = ContactUs::where('status',1)->where('inq_date',date('Y-m-d'))->count();
          
-        return view('admin.dashboard', compact('title'));
+        return view('admin.dashboard', compact('data'));
     }
 
 

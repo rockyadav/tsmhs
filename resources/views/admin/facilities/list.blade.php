@@ -35,27 +35,31 @@
                             <thead>
                                 <tr>
                                     <th>SNO</th>
-                                    <th>Title</th>
                                     <th>Image</th>
+                                    <th>Title</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                               @if(count($data['list'])>0)
-                              @php
-                                $i=0;
-                              @endphp
+                                @php
+                                    $i=0;
+                                    if(isset($_GET['page']))
+                                    {
+                                        $i = (15*$_GET['page'])-15;
+                                    }
+                                @endphp
                                 @foreach($data['list'] as $row)
                                 @php
                                   $i++;
                                 @endphp
                                 <tr>
                                 <td>{{$i}}</td>
-                                <td>{{$row->title}}</td>
                                 <td> @if($row->image != '')
                                     <img class="tem-img"  src="{{ url('public/images/facilities/'.$row->image) }}"  alt="image" class="img">
                                     @endif
                                 </td>
+                                <td>{{$row->title}}</td>
                                 <td class="td-actions">
                                         <a href="{{url('admin/facilities/show/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-warning">
                                             <i class="material-icons">visibility</i>

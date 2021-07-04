@@ -256,7 +256,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="single-footer-widget">
                 <div class="footer-logo">
-                    <a href="index.html"><img src="{{url('public/front-assets/img/logo/logo.png')}}" alt=""></a>
+                    <a href="{{url('/')}}"><img src="{{url('public/front-assets/img/logo/logo.png')}}" alt=""></a>
                 </div>
                 <p>Being a hospital-based institution, and an affiliate of the famous Thika Nursing Home (which is only two minutes away from the school) as well as the Ruiru Private Hospital.</p>
             </div>
@@ -284,10 +284,9 @@
             <div class="single-footer-widget">
                 <h3>Social Link</h3>
                <div class="social-icons">
-                    <a href="https://www.addtoany.com/add_to/facebook?linkurl=https%3A%2F%2Ftsmhs.ac.ke%2Fcategory%2Fnews%2F&amp;linkname=News%20%7C%20THIKA%20SCHOOL%20OF%20MEDICAL%20AND%20HEALTH%20SCIENCES&amp;linknote=" target="_blank"><i class="zmdi zmdi-facebook" target="_blank"></i></a>
-                    <a href="https://www.addtoany.com/add_to/linkedin?linkurl=https%3A%2F%2Ftsmhs.ac.ke%2F&linkname=THIKA%20SCHOOL%20OF%20MEDICAL%20AND%20HEALTH%20SCIENCES%20%7C%20%22Nurturing%20Professional%20Excellence%22&linknote=0723%20991%20866%2F0708%20241%20019" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                    <a href="https://www.addtoany.com/add_to/twitter?linkurl=https%3A%2F%2Ftsmhs.ac.ke%2F&linkname=THIKA%20SCHOOL%20OF%20MEDICAL%20AND%20HEALTH%20SCIENCES%20%7C%20%22Nurturing%20Professional%20Excellence%22&linknote=0723%20991%20866%2F0708%20241%20019" target="_blank"><i class="zmdi zmdi-twitter"></i></a>
-                    <a href="https://instagram.com/tsmhs_college/" target="_blank"><i class="zmdi zmdi-instagram"></i></a>
+                    <a href="https://web.facebook.com/tsmhs.ac.ke" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                    <a href="https://twitter.com/tsmhscollege" target="_blank"><i class="zmdi zmdi-twitter"></i></a>
+                    <a href="https://instagram.com/tsmhs_college" target="_blank"><i class="zmdi zmdi-instagram"></i></a>
                 </div>
             </div>
         </div>

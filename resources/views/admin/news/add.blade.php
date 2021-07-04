@@ -62,7 +62,7 @@
                                      </div>
                                  </div>
                             </div>
-                             <div class="col-md-6"> <br>
+                            <div class="col-md-6"> <br>
                                  <label class="col-sm-3 label-on-left">Image</label>
                                 <div class="card-profile" style="text-align: left;">
                                         <div class="fileinput fileinput-new text-center" data-provides="fileinput">
@@ -70,16 +70,43 @@
                                                 <img src="{{ url('public/images/placeholder.jpg') }}" style="height: 100px; width: 135px;" alt="..." class="img">
                                             </div>
                                             <div class="fileinput-preview fileinput-exists thumbnail " style="height: 100px; width: 135px;"></div>
+                                            <p>(Size : 870x439)</p>
                                             <div class="change-img-btn">
                                                 <span class="btn btn-primary btn-round btn-file">
                                                     <span class="fileinput-new">Upload image</span>
                                                     <span class="fileinput-exists">Change</span> 
-                                                    <input type="file" name="image" accept="image/*" id="upload"  onchange="return ValidateFileUpload()" required="" />
+                                                    <input type="file" name="image" accept="image/*" required="" />
                                                 </span>
                                                 <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                             </div>
                                             <span class="error_image error"></span>
                                         </div>
+                                </div>
+                            </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-md-6">
+                                <label class="col-sm-3 label-on-left">Link Title</label>
+                                 <div class="col-sm-9">
+                                     <div class="form-group label-floating is-empty">
+                                         <label class="control-label"></label>
+                                         <input type="text"  class="form-control" name="link_title" placeholder="Enter Link Title" value="{{old('link_title')}}">
+                                         @if ($errors->has('link_title'))
+                                             <span class="error-block">
+                                            <strong>{{ $errors->first('link_title') }}</strong>
+                                            </span>
+                                         @endif
+                                     </div>
+                                 </div>
+                            </div>
+                            <div class="col-md-6">
+                                 <label class="col-sm-3 label-on-left">Link File</label>
+                                <div class="card-profile" style="text-align: left;">
+                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                        <div class="change-img-btn">
+                                           <input type="file" name="link_file"/>
+                                        </div>
+                                   </div>
                                 </div>
                             </div>
                          </div>

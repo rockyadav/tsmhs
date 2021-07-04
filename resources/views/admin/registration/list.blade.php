@@ -57,7 +57,7 @@
                             <thead>
 
                                 <tr>
-
+                                    <th>S.No</th>
                                     <th>Name</th>
                                     <th>Mobile</th>
                                     <th>Mode Of Study</th>
@@ -73,9 +73,16 @@
                             <tbody>
 
                               @if(count($data)>0)
+                                @php
+                                    $i=0;
+                                    if(isset($_GET['page']))
+                                    {
+                                        $i = (15*$_GET['page'])-15;
+                                    }
+                                @endphp
                                 @foreach($data as $row)
                                 <tr>
-
+                                <td>{{++$i}}</td>
                                 <td>{{$row->first_name.' '.$row->last_name}}</td>
                                 <td>{{$row->mobile}}</td>
                                 <td>{{$row->mode_of_study}}</td>

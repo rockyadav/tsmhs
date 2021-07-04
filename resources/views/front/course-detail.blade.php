@@ -51,7 +51,7 @@
 							<div class="text"><span>Category</span> <span class="text-right">@if($data['cources']->category_id==1) Certificate @elseif($data['cources']->category_id==2) Diploma @endif</span></div>
 							<div class="text"><span>Exam Board</span> <span class="text-right">{{$data['cources']->exam_board}}</span></div>
 							<div class="text"><span>Duration</span> <span class="text-right">{{$data['cources']->duration}}</span></div>
-							<div class="text"><span>Course Fee</span> <span class="text-right">{{$data['cources']->course_fee}}</span></div>
+							<div class="text"><span>Mean Grade</span> <span class="text-right">{{$data['cources']->grade}}</span></div>
 						</div>
 						
 					</div>

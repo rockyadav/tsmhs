@@ -53,31 +53,32 @@
                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 
                             <thead>
-
                                 <tr>
-
                                     <th>SNO</th>
+                                    <th>Image</th>
                                     <th>Name</th>
                                     <th>Date</th>
                                     <th>Action</th>
-
                                 </tr>
-
                             </thead>
 
                             <tbody>
 
                               @if(count($data['list'])>0)
-                              @php
-                               $i=0;
-                              @endphp
+                                @php
+                                    $i=0;
+                                    if(isset($_GET['page']))
+                                    {
+                                        $i = (15*$_GET['page'])-15;
+                                    }
+                                @endphp
                                 @foreach($data['list'] as $row)
                                 @php
                                    $i++;
                                 @endphp
                                 <tr>
-
                                 <td>{{$i}}</td>
+                                <td><img src="{{url('public/images/departments/'.$row->image)}}" style="height: 100px; width: 135px;" alt="..." class="img"></td>
                                 <td>{{$row->name}}</td>
                                 <td>{{date('d-m-Y',strtotime($row->created_at))}}</td>
                                 <td class="td-actions">

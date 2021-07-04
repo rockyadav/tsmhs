@@ -56,13 +56,13 @@
                         @endif
                    </div>
                     <div class="form-group">
-                        <input type="text" name="mobile" class="form-control numbersOnly" placeholder="Phone Number" id="tmobile" required="" value="{{old('mobile')}}">
+                        <input type="text" name="mobile" class="form-control numbersOnly" placeholder="Phone Number" id="tmobile" required="" onkeypress="return isNumber(event)" value="{{old('mobile')}}">
                         @if ($errors->has('mobile'))
                            <span class="error-block">
                            <strong>{{ $errors->first('mobile') }}</strong>
                            </span>
                         @endif
-                    </div>
+                    </div> 
                     <div class="form-group">
                         @php
                             $grade_id = old('grade');
@@ -143,7 +143,7 @@
             <div class="col-lg-4 col-md-4 col-12">
                 <div class="single-fun-factor">
                     <img src="{{url('public/front-assets/trophy/trophy.png')}}">
-                    <h4>Members</h4>
+                    <h4>Students</h4>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-12">
@@ -199,7 +199,7 @@
                             <p>{{$department->description}}</p>
                         </div>
                         <div class="button-bottom">
-                            <a href="{{url('departments/'.$department->page_url)}}" class="button-default">Learn Now</a>
+                            <a href="{{url('departments/'.$department->page_url)}}" class="button-default">Explore More</a>
                         </div>
                     </div>
                 </div>
@@ -259,7 +259,7 @@
                                 echo strip_tags($newss->description);
                             }
                         @endphp</p>
-                       <a href="{{url('news-details/'.$newss->page_url)}}" class="button-default">LEARN Now</a>
+                       <a href="{{url('news-details/'.$newss->page_url)}}" class="button-default">Explore More</a>
                     </div>
                 </div>
             </div>
@@ -323,7 +323,7 @@
                                         }
                                     @endphp
                                 </p>
-                               <a class="button-default" href="{{url('event-details/'.$event->page_url)}}">LEARN Now</a>
+                               <a class="button-default" href="{{url('event-details/'.$event->page_url)}}">Explore More</a>
                             </div>
                         </div>
                     </div>

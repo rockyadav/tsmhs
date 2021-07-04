@@ -56,7 +56,7 @@
 		                            }
 		                        @endphp
 		                    </p>
-	                       <a href="{{url('news-details/'.$newss->page_url)}}" class="button-default">LEARN Now</a>
+	                       <a href="{{url('news-details/'.$newss->page_url)}}" class="button-default">Explore More</a>
 	                    </div>
 	                </div>
 	            </div>

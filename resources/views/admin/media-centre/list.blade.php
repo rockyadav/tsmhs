@@ -92,7 +92,7 @@
                                 </td>
                                 @else
                                 <td>
-                                    <iframe width="250px" height="150px" src="{{$row->video_link}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe data-u="image" width="250px" height="150px" src="https://www.youtube.com/embed/{{$row->video_id}}?rel=0&wmode=Opaque&enablejsapi=1;showinfo=0;controls=0"frameborder="0" allowfullscreen></iframe>
                                 </td>
                                 @endif
                                 <td>{{$row->name}}</td>
