@@ -1,96 +1,92 @@
 @extends('layouts.adminTemplate')
-@section('page-title','Inquiries')
+
+@section('page-title','Admissions')
+
 @section('content')
 
 <style>
+
 .rimg{ 
+
   height : 50px!important;
+
   width : 50px!important ;
+
 }
+
 </style>
 
 <div class="content">
+
 @include('layouts.error-sucess-messages')
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-              <?php
-                    $f_date ='';
-                    if(isset($_GET['f_date']))
-                    {
-                        $f_date = $_GET['f_date'];
-                    }
-
-                    $t_date ='';
-                    if(isset($_GET['t_date']))
-                    {
-                        $t_date = $_GET['t_date'];
-                    }
-            ?>
-            <div class="col-md-8 col-md-offset-2">
-                <form>
-                  <div class="col-md-4"> 
-                      <div class="input-group">
-                      <input type="date"  name="f_date" value="{{ $f_date }}" class="form-control" placeholder="From date...">
-                      </div>
-                  </div>
-                  <div class="col-md-4">
-                      <div class="input-group"> 
-                      <input type="date" name="t_date" value="{{ $t_date }}" class="form-control" placeholder="To date...">
-                      </div>
-                  </div>
-                  <div class="col-md-4">
-                      <button type="submit"  id="search-btn" class="btn btn-flat"><i class="fa fa-search" ></i></button>
-                      <a href="{{url('admin/inquiries')}}" class="btn btn-flat"><i class="fa fa-refresh" aria-hidden="true"></i></a> 
-                  </div>
-               </form>
-           </div>
-        </div>
-        <div class="col-md-12">
             <div class="card">
                 <div class="card-header card-header-icon" data-background-color="green">
-                   <i class="material-icons">account_circle</i>
+                    <i class="material-icons">account_circle</i>
                 </div>
                 <div class="card-content">
-                    <h4 class="card-title">Inquiries</h4>
+                    <h4 class="card-title">Student List</h4>
                     <div class="toolbar">
                     </div>
                     <div class="material-datatables">
+                        <div class="add-more text-right">
+                       <!--      <a class="btn btn-rose btn-fill" href="{{route('courses.create')}}">Add<div class="ripple-container"></div></a> -->
+                        </div>
                         <div class="table-responsive">
                         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>SNO</th>
-                                    <th>Date</th>
+                                    <th>S.No</th>
                                     <th>Name</th>
                                     <th>Mobile</th>
-                                    <th>Subject</th>
+                                    <th>Mode Of Study</th>
+                                    <th>KCSE Grade</th>
+                                    <th>Intrested Course</th>
+                                    <th>Date</th>
+                                    <th>Fees Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                              @if(count($data['list'])>0)
-                              @php
-                                $i=0;
-                              @endphp
-                                @foreach($data['list'] as $row)
+                              @if(count($data)>0)
                                 @php
-                                  $i++;
+                                    $i=0;
+                                    if(isset($_GET['page']))
+                                    {
+                                        $i = (15*$_GET['page'])-15;
+                                    }
                                 @endphp
+                                @foreach($data as $row)
                                 <tr>
-                                <td>{{$i}}</td>
-                                <td> {{date('d-m-Y h:i A' ,strtotime($row->created_at))}}</td>
+                                <td>{{++$i}}</td>
                                 <td>{{$row->first_name.' '.$row->last_name}}</td>
                                 <td>{{$row->mobile}}</td>
-                                <td>{{$row->subject}}</td>
+                                <td>{{$row->mode_of_study}}</td>
+                                <td>{{$row->kcse_grade}}</td>
+                                <td>{{$row->course_name}}</td>
+                                <td>{{date('d-m-Y',strtotime($row->created_at))}}</td>
+                                <td>
+                                   <span style="color:red;">Not Paid</span>
+                                </td>
                                 <td class="td-actions">
-                                        <a href="{{url('admin/inquiries/show/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-warning">
+                                     <a href="{{url('admin/admission/details/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-success">
                                             <i class="material-icons">visibility</i>
                                         </button></a>
+
+                                         @if(Auth::user()->role==1 || Auth::user()->role==4)
+                                        <a href="{{url('admin/admission/edit/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-warning">
+                                            <i class="material-icons">edit</i>
+                                        </button></a>
+                                        @endif
+                                        @if(Auth::user()->role==1)
                                         <a href="javascript:void(0);" onclick="deleteMyData('{{$row->id}}');">
                                         <button type="button" rel="tooltip" class="btn btn-danger">
                                             <i class="material-icons">close</i>
                                         </button></a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -104,7 +100,7 @@
                             </tbody>
                         </table>
                         </div>
-                        <div class="text-center">{{$data['list']->links()}}</div>
+                        <div class="text-center">{{$data->links()}}</div>
                     </div>
                 </div>
                 <!-- end content-->
@@ -127,25 +123,25 @@ function deleteMyData(id)
     cancelButtonClass: 'btn btn-danger',
     confirmButtonText: 'Yes',
     buttonsStyling: false
-
     }).then(function() {
 
         $.ajax({
-                url: base_url+'/admin/inquiries-destroy/'+id,
+
+                url: base_url+'/admin/admission-destroy/'+id,
                 method:"get",
             success:function(data)
             {
                 if(data=='success')
                 {
-                    var message = 'Detail has been deleted successfully.';
+                    var message = 'Details has been deleted successfully.';
                     demo.showNotification('bottom','right','success', message );
                     $('#datatables').load(document.URL +  ' #datatables');
                 }else{
-                    var message = 'Please try again';
-                    demo.showNotification('bottom','right','danger', message );
-                    $('#datatables').load(document.URL +  ' #datatables');
+                     alert('Please try again.');
                 }                    
+
             },
+
             error:function(er){
                 console.log(er); 
             }

@@ -148,14 +148,14 @@
                 $page = Request::segment(2);
                @endphp
                 <ul class="nav navmenu">
-                  <li class="@if($page=='dashboard') active @endif">
-                    <a href="{{url('admin/dashboard')}}">
-                        <i class="material-icons">dashboard</i>
-                        <p>Dashboard</p>
-                    </a>
-                 </li>
+                    <li class="@if($page=='dashboard') active @endif">
+                        <a href="{{url('admin/dashboard')}}">
+                            <i class="material-icons">dashboard</i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
                   
-               @if(Auth::user()->role==1)
+                    @if(Auth::user()->role==1)
                     <li class="@if($page=='campus') active @endif">
                         <a href="{{url('admin/campus')}}">
                             <i class="material-icons">dashboard</i>
@@ -169,14 +169,14 @@
                         </a>
                     </li>
 
-                      <li class="@if($page=='department') active @endif">
+                    <li class="@if($page=='department') active @endif">
                         <a href="{{url('admin/department')}}">
                             <i class="material-icons">dashboard</i>
                             <p>Departments</p>
                         </a>
                     </li>
 
-                      <li class="@if($page=='cluster-requirement') active @endif">
+                    <li class="@if($page=='cluster-requirement') active @endif">
                         <a href="{{url('admin/cluster-requirement')}}">
                             <i class="material-icons">dashboard</i>
                             <p>Cluster Requirements</p>
@@ -192,11 +192,29 @@
 
                     @endif
 
+                    @if(Auth::user()->role==1 || Auth::user()->role==4)
+                    <li class="@if($page=='leads') active @endif">
+                        <a href="{{url('admin/leads')}}">
+                            <i class="material-icons">dashboard</i>
+                            <p>Leads</p>
+                        </a>
+                    </li>
+                    @endif
+                    
                     <li class="@if($page=='student') active @endif">
                         <a href="{{url('admin/student')}}">
                             <i class="material-icons">dashboard</i>
                             <p>Registrations</p>
                         </a>
+                    </li>
+                    <li class="@if($page=='admissions') active @endif">
+                        <a href="{{url('admin/admissions')}}">
+                            <i class="material-icons">dashboard</i>
+                            <p>Admissions</p>
+                        </a>
+                    </li>
+
+                    @if(Auth::user()->role==1)
                     <li class="@if($page=='slider') active @endif">
                         <a href="{{url('admin/slider')}}">
                             <i class="material-icons">dashboard</i>
@@ -204,7 +222,7 @@
                         </a>
                     </li>
 
-                      <li class="@if($page=='facilities') active @endif">
+                    <li class="@if($page=='facilities') active @endif">
                         <a href="{{url('admin/facilities')}}">
                             <i class="material-icons">dashboard</i>
                             <p>Facilities</p>
@@ -245,6 +263,7 @@
                             <p>Inquiries</p>
                         </a>
                     </li>
+                    @endif
                 </ul>
             </div>
         </div>

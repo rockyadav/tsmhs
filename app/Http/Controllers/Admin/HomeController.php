@@ -45,7 +45,9 @@ class HomeController extends Controller
         $data['departments'] = Department::where('status',1)->count();
         $data['courses'] = Courses::where('status',1)->count();
         $data['news'] = News::where('status',1)->count();
+        $data['leads'] = User::where(['status'=>1,'role'=>2,'register_step'=>1])->count();
         $data['register'] = User::where(['status'=>1,'role'=>2,'register_step'=>2])->count();
+        $data['admission'] = User::where(['status'=>1,'role'=>2,'register_step'=>3])->count();
         $data['inquiries'] = ContactUs::where('status',1)->where('inq_date',date('Y-m-d'))->count();
          
         return view('admin.dashboard', compact('data'));

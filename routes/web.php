@@ -114,11 +114,13 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'AdminMiddleware' ],function
 	Route::post('clusterRequirementUpdate','Admin\ClusterRequirementController@update');
 	Route::get('cluster-requirement-destroy/{id}', 'Admin\ClusterRequirementController@destroy');
 
+    //registrations
 	Route::resource('student','Admin\RegistrationController');
 	Route::get('student/edit/{id}','Admin\RegistrationController@edit');
 	Route::get('student/details/{id}','Admin\RegistrationController@show');
 	Route::post('studentUpdate','Admin\RegistrationController@update');
 	Route::get('student-destroy/{id}', 'Admin\RegistrationController@destroy');
+	Route::get('student/updatestatus/{id}/{status}', 'Admin\RegistrationController@updatestatus');
 
 	//users
 	Route::resource('users', 'Admin\UsersController');
@@ -183,6 +185,21 @@ Route::group([ 'prefix' => 'admin', 'middleware' => 'AdminMiddleware' ],function
 	Route::get('logo/edit/{id}','Admin\LogoController@edit');
 	Route::post('logo-update','Admin\LogoController@update');
 	Route::get('logo-destroy/{id}', 'Admin\LogoController@destroy');
+
+
+	//Leads
+	Route::resource('leads','Admin\LeadsController');
+	Route::get('lead/edit/{id}','Admin\LeadsController@edit');
+	Route::get('lead/details/{id}','Admin\LeadsController@show');
+	Route::post('lead-update','leads\LeadsController@update');
+	Route::get('lead-destroy/{id}', 'Admin\LeadsController@destroy');
+
+	//Admissions
+	Route::resource('admissions','Admin\AdmissionController');
+	Route::get('admission/edit/{id}','Admin\AdmissionController@edit');
+	Route::get('admission/details/{id}','Admin\AdmissionController@show');
+	Route::post('admission-update','leads\AdmissionController@update');
+	Route::get('admission-destroy/{id}', 'Admin\AdmissionController@destroy');
 
 });
 
