@@ -64,8 +64,9 @@
                                     <th>KCSE Grade</th>
                                     <th>Intrested Course</th>
                                     <th>Date</th>
+                                    <th>Fee Status</th>
+                                    <th>Status</th>
                                     <th>Action</th>
-
                                 </tr>
 
                             </thead>
@@ -91,24 +92,36 @@
 
                                 <td>{{date('d-m-Y',strtotime($row->created_at))}}</td>
 
+                                <td>
+                                   <span style="color:red;">Not Paid</span>
+                                </td>
+                                <td class="center">
+                                    @if(Auth::user()->role==1 || Auth::user()->role==4)
+                                    @if($row->is_approved==1) 
+                                       <a href="{{url('admin/student/updatestatus/'.$row->id.'/0')}}" class="btn btn-sm btn-success statusupdate" title="Click to Un-Approved">Approved</a>
+                                    @else($row->is_approved==0)
+                                       <a href="{{url('admin/student/updatestatus/'.$row->id.'/1')}}" class="btn btn-sm btn-danger statusupdate" title="Click to Approved">Un-Approved</a>
+                                    @endif
+                                    @else
+                                    @if($row->is_approved==1) 
+                                       <span style="color:green;">Approved</span>
+                                    @else($row->is_approved==0)
+                                       <span style="color:red;">Un-Approved</span>
+                                    @endif
+                                    @endif
+                                </td>
+
                                 <td class="td-actions">
 
-                                     <a href="{{url('admin/student/details/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-success">
+                                        <a href="{{url('admin/student/details/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-success">
                                             <i class="material-icons">visibility</i>
                                         </button></a>
 
-                                         @if(Auth::user()->role==1 || Auth::user()->role==4)
+                                        @if(Auth::user()->role==1 || Auth::user()->role==4)
                                         <a href="{{url('admin/student/edit/'.$row->id)}}"><button type="button" rel="tooltip" class="btn btn-warning">
                                             <i class="material-icons">edit</i>
                                         </button></a>
                                         @endif
-                                        @if(Auth::user()->role==1)
-                                        <a href="javascript:void(0);" onclick="deleteMyData('{{$row->id}}');">
-                                        <button type="button" rel="tooltip" class="btn btn-danger">
-                                            <i class="material-icons">close</i>
-                                        </button></a>
-                                        @endif
-
                                     </td>
 
                                 </tr>

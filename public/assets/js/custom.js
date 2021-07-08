@@ -184,3 +184,75 @@ $(document).on('change', '#category', function (e) {
         }
     });
 });
+
+
+$(document).on('click', '.statusupdate', function (e) { 
+    e.preventDefault();
+if(confirm('Are you sure you want to update status?')){    
+    var $this = $(this);
+        if($this.attr('href') != '')
+        { 
+            var id = $($this).attr('data-id');
+            $.ajax({
+                url:$this.attr('href'),
+                method:"GET",
+                success:function(response) {
+                    console.log(response);
+                    if(response.status=='error')
+                    {
+                        demo.showNotification('bottom','right','danger', response.msg); 
+                    }else{
+                      
+                        demo.showNotification('bottom','right','success', response.msg); 
+
+                       setTimeout(function(){ location.reload(); }, 1000);
+                    } 
+                                
+                },
+                error:function(response){
+                    console.log('error');
+                },
+                complete: function () {
+                    //console.log('complete');
+                }
+            });
+        }
+    }
+});
+
+$(document).on('change', '#KCSEMeanGrade', function (e) { 
+    $('#education_level').val('');
+    $('#intrested_course').val('');
+    $('#intrested_course').html('<option value="">Select Level First</option>');
+    return;
+});
+
+$(document).on('change', '#education_level', function (e) { 
+    e.preventDefault();
+    var cat_id = $(this).val();
+        if(cat_id != '')
+        {
+            var grade = $('#KCSEMeanGrade').val();
+            if(grade=='')
+            {
+                alert('Select your grade');
+                $(this).val('');
+                return;
+            }
+
+            $.ajax({
+                url:base_url+'/get-courses/'+cat_id+'/'+grade,
+                method:"GET",
+                success:function(response) {
+                   $('#intrested_course').html(response);   
+                   //$('#courses').selectpicker('refresh');   
+                },
+                error:function(response){
+                    console.log('error');
+                },
+                complete: function () {
+                    //console.log('complete');
+                }
+            });
+        }
+});

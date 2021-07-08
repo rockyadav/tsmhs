@@ -1,6 +1,7 @@
 $(document).on('change', '#KCSEMeanGrade', function (e) { 
     $('#category').val('');
     $('#courses').val('');
+    $('#courses').html('<option value="">Select Level First</option>');
     return;
 });
 

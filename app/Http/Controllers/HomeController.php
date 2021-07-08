@@ -270,8 +270,10 @@ class HomeController extends Controller
                             
            $grade = Cluster_requirement::where('status',1)->groupBy('grade')->orderBy('grade','asc')->get();
            $category = Categories::orderBy('name','asc')->get();
+           $campus = Campus::orderBy('name','desc')->where('status',1)->get();
+
         $hide = 1;
-        return view('front.registration', compact('title','country','state','courses','grade','category','hide'));
+        return view('front.registration', compact('title','country','state','courses','grade','category','hide','campus'));
     }
 
 
@@ -282,7 +284,7 @@ class HomeController extends Controller
           'email'            => 'required',
           'first_name'       => 'required',
           'last_name'        => 'required',
-          'national_id'      => 'required',
+          //'national_id'      => 'required',
           'preferred_intake' => 'required',
           'campus_of_study'  => 'required',
           'mode_of_study'    => 'required',
@@ -306,6 +308,7 @@ class HomeController extends Controller
           $check = DB::table('users')
                    ->orderBy('id','DESC')
                    ->where('role',2)
+                   ->where('email','!=',$email)
                    ->select('id','registration_number')
                    ->first();
           if(!empty($check))
@@ -533,8 +536,9 @@ class HomeController extends Controller
                             
            $grade = Cluster_requirement::where('status',1)->groupBy('grade')->orderBy('grade','asc')->get();
            $category = Categories::orderBy('name','asc')->get();
+           $campus = Campus::orderBy('name','desc')->where('status',1)->get();
         $hide = 0;
-        return view('front.registration', compact('title','country','state','courses','grade','category','hide'));
+        return view('front.registration', compact('title','country','state','courses','grade','category','hide','campus'));
     }
 
     public function showCampus($url)

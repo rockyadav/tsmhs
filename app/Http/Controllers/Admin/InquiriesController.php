@@ -31,7 +31,6 @@ class InquiriesController extends Controller
             $t_date = $_GET['t_date'];
         }
 
-
         if($f_date!='')
         {
           $f_date = date("Y-m-d",strtotime($f_date));

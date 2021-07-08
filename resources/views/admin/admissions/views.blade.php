@@ -1,6 +1,6 @@
 @extends('layouts.adminTemplate')
 
-@section('page-title', 'Update student details')
+@section('page-title', 'Student details')
 
 @section('content')
 
@@ -36,19 +36,19 @@
 
                     <div class="back-btn text-right">
 
-                        <a class="btn btn-rose btn-fill" href="{{ url('admin/student')}}">Back<div class="ripple-container"></div></a>
+                        <a class="btn btn-rose btn-fill" href="{{ url('admin/admissions')}}">Back<div class="ripple-container"></div></a>
 
                     </div>
 
-                    <form method="post" action="{{url('admin/studentUpdate')}}" enctype="multipart/form-data">
-
+                    <form method="post" action="{{url('admin/admission-update')}}" enctype="multipart/form-data" id="myForm">
                      {{ csrf_field() }}
-
                      <div class="card-content">
-
                         <div class="card-content">
-                             <input type="hidden" name="rowId" required="" value="{{$details->id}}"> 
-
+                            <div class="row">
+                        <div class="col-md-12">
+                            <h5><b>Personal Details:</b></h5>
+                         </div>
+                      </div>
                          <div class="row"> 
                             <div class="col-md-6">
                                 <label class="col-sm-3 label-on-left">First Name</label>
@@ -103,7 +103,7 @@
                                  <div class="col-sm-9">
                                      <div class="form-group label-floating is-empty">
                                          <label class="control-label"></label>
-                                         <input type="text"  class="form-control" name="alt_mobile" placeholder="Enter alt mobile" value="{{$details->alt_mobile}}">
+                                         <input type="text"  class="form-control" name="alt_mobile" value="{{ $details->alt_mobile == '' ? 'N/A' :$details->alt_mobile}}">
                                          @if ($errors->has('alt_mobile'))
                                              <span class="error-block">
                                             <strong>{{ $errors->first('alt_mobile') }}</strong>
@@ -120,7 +120,7 @@
                                  <div class="col-sm-9">
                                      <div class="form-group label-floating is-empty">
                                          <label class="control-label"></label>
-                                         <input type="text"  class="form-control" name="email" placeholder="Enter email"  value="{{$details->email}}">
+                                         <input type="text"  class="form-control" name="email"  value="{{ $details->email == '' ? 'N/A' :$details->email}}">
                                          @if ($errors->has('email'))
                                              <span class="error-block">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -154,7 +154,7 @@
                                          <label class="control-label"></label>
                                           <select name="nationality" class="form-control">
                                               <option value="">Select Nationality</option>
-                                                <option value="Kenyan" @if($details->nationality == 'Kenyan') selected @endif >Kenyan</option>
+                                <option value="Kenyan" @if($details->nationality == 'Kenyan') selected @endif >Kenyan</option>
                                               <option value="Non Kenyan" @if($details->nationality == 'Non Kenyan') selected @endif>Non Kenyan</option>
                                            </select>
                                          @if ($errors->has('nationality'))
@@ -171,7 +171,7 @@
                                  <div class="col-sm-9">
                                      <div class="form-group label-floating is-empty">
                                          <label class="control-label"></label>
-                                         <input type="text"  class="form-control" name="national_id" placeholder="Enter national id" value="{{$details->national_id}}">
+                                         <input type="text"  class="form-control" name="national_id" placeholder="Enter national id" required="" value="{{$details->national_id}}">
                                          @if ($errors->has('national_id'))
                                              <span class="error-block">
                                             <strong>{{ $errors->first('national_id') }}</strong>
@@ -234,7 +234,7 @@
                                  <div class="col-sm-9">
                                      <div class="form-group label-floating is-empty">
                                          <label class="control-label"></label>
-                                         <input type="text"  class="form-control" name="guardian_name" placeholder="Enter guardian name" value="{{$details->guardian_name}}">
+                                         <input type="text"  class="form-control" name="guardian_name" placeholder="Enter guardian name" value="{{ $details->guardian_name == '' ? 'N/A' :$details->guardian_name}}">
                                          @if ($errors->has('guardian_name'))
                                              <span class="error-block">
                                             <strong>{{ $errors->first('guardian_name') }}</strong>
@@ -249,7 +249,7 @@
                                  <div class="col-sm-9">
                                      <div class="form-group label-floating is-empty">
                                          <label class="control-label"></label>
-                                         <input type="text"  class="form-control" name="guardian_mobile" placeholder="Enter guardian mobile"  value="{{$details->guardian_mobile}}">
+                                         <input type="text"  class="form-control" name="guardian_mobile" placeholder="Enter guardian mobile"  value="{{ $details->guardian_mobile == '' ? 'N/A' :$details->guardian_mobile}}">
                                          @if ($errors->has('guardian_mobile'))
                                              <span class="error-block">
                                             <strong>{{ $errors->first('guardian_mobile') }}</strong>
@@ -260,9 +260,9 @@
                             </div>
                         </div>
 
-                         <div class="row">
+                        <div class="row">
                         <div class="col-md-12">
-                            <h5> Course selection:</h5>
+                            <h5><b> Course selection:</b></h5>
                          </div>
                       </div>
 
@@ -296,11 +296,10 @@
                                          <label class="control-label"></label>
                                          <select name="campus_of_study" class="form-control" required="">
                                           <option value="">Select campus of study</option>
-                                          @if(count($campus)>0)
-                                              @foreach($campus as $camp)
-                                                <option value="{{$camp->id}}" @if($details->campus_of_study == $camp->id) selected @endif>{{$camp->name}}</option>
-                                              @endforeach
-                                          @endif
+                                          <option value="Main Campus-Thika" @if($details->campus_of_study == 'Main Campus-Thika') selected @endif>Main Campus-Thika</option>
+                                          <option value="Kitui" @if($details->campus_of_study == 'Kitui') selected @endif>Kitui</option>
+                                          <option value="Kisumu" @if($details->campus_of_study == 'Kisumu') selected @endif>Kisumu</option>
+                                          <option value="Mombasa" @if($details->campus_of_study == 'Mombasa') selected @endif>Mombasa</option>
                                        </select>
                                          @if ($errors->has('campus_of_study'))
                                              <span class="error-block">
@@ -321,7 +320,7 @@
                                          <label class="control-label"></label>
                                          <select name="mode_of_study" class="form-control" required="">
                                               <option value="">Select mode of study</option>
-                                              <option value="Regular Classes"  @if($details->mode_of_study == 'Regular Classes') selected @endif>Regular Classes</option>
+                                              <option value="Regular Classes"  @if($details->mode_of_study == 'Evening Classes') selected @endif>Regular Classes</option>
                                               <option value="Evening Classes" @if($details->mode_of_study == 'Evening Classes') selected @endif>Evening Classes</option>
                                               <option value="Weekend Classes" @if($details->mode_of_study == 'Weekend Classes') selected @endif>Weekend Classes</option>
                                               <option value="Distance learning" @if($details->mode_of_study == 'Distance learning') selected @endif>Distance learning</option>
@@ -336,18 +335,11 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="col-sm-3 label-on-left">KCSE Grade</label>
+                                <label class="col-sm-3 label-on-left">Campus Of Study</label>
                                  <div class="col-sm-9">
                                      <div class="form-group label-floating is-empty">
                                          <label class="control-label"></label>
-                                         <select name="kcse_grade" class="form-control" required="" id="KCSEMeanGrade">
-                                          <option value="">Select campus of study</option>
-                                          @if(count($grade)>0)
-                                              @foreach($grade as $g)
-                                                <option value="{{$g->grade}}" @if($details->kcse_grade == $g->grade) selected @endif>{{$g->grade}}</option>
-                                              @endforeach
-                                          @endif
-                                       </select>
+                                         <input type="text" name="kcse_grade" id="kcse_grade" class="form-control" required="" value="{{$details->kcse_grade}}" required="">
                                          @if ($errors->has('kcse_grade'))
                                              <span class="error-block">
                                             <strong>{{ $errors->first('kcse_grade') }}</strong>
@@ -364,8 +356,7 @@
                                  <div class="col-sm-9">
                                      <div class="form-group label-floating is-empty">
                                          <label class="control-label"></label>
-                                           <select name="education_level" class="form-control" required="" id="education_level">
-                                              <option value="">Select Level</option>
+                                           <select name="education_level" class="form-control" required="">
                                               @if(count($category)>0)
                                                @foreach($category as $c)
                                                <option value="{{$c->id}}" @if($details->education_level==$c->id) selected @endif>{{$c->name}}</option>
@@ -401,14 +392,12 @@
                                  </div>
                             </div>
                         </div>
-                            
-
                         <div class="row">
                             <div class="col-md-6">
                                 <label class="col-sm-2 label-on-left">Secondary School Name</label>
                                  <div class="col-sm-10">
                                      <div class="form-group label-floating is-empty">
-                                         <input type="text" name="secondary_school_name" class="form-control" value="{{$details->secondary_school_name}}">
+                                         <input type="text" name="secondary_school_name" class="form-control" required="" value="{{ $details->secondary_school_name == '' ? 'N/A' :$details->secondary_school_name}}">
                                          @if ($errors->has('secondary_school_name'))
                                              <span class="error-block">
                                             <strong>{{ $errors->first('secondary_school_name') }}</strong>
@@ -417,74 +406,40 @@
                                      </div>
                                  </div>
                             </div>
-                         </div>
-
-
-                         <div class="row">
+                        </div>
+                          <div class="row">
                              <div class="col-md-6">
-                                <label class="col-sm-4 label-on-left">KCSE Transcript</label>
-                                 <div class="col-sm-8">
+                                <label class="col-sm-2 label-on-left">KCSE Transcript</label>
+                                 <div class="col-sm-10">
                                      <div class="label-floating is-empty">
-                                         <input type="file" name="kcse_marksheet" style="padding-top: 20px;" >
-                                         @if ($errors->has('kcse_marksheet'))
-                                             <span class="error-block">
-                                            <strong>{{ $errors->first('kcse_marksheet') }}</strong>
-                                            </span>
-                                         @endif
-
                                          @if($details->kcse_marksheet!="")
                                            <br>
                                          <img src="{{url('public/images/marksheet/'.$details->kcse_marksheet)}}" height="80px" width="60px">
                                          @endif
-
                                      </div>
                                  </div>
                             </div>
-                            
                             <div class="col-md-6">
-                                <label class="col-sm-3 label-on-left">Your Picture</label>
-                                 <div class="col-sm-9">
+                                <label class="col-sm-2 label-on-left">Your Picture</label>
+                                 <div class="col-sm-10">
                                      <div class="label-floating is-empty">
-                                         <input type="file" name="your_picture" style="padding-top: 20px;">
-                                         @if ($errors->has('your_picture'))
-                                             <span class="error-block">
-                                            <strong>{{ $errors->first('your_picture') }}</strong>
-                                            </span>
-                                         @endif
-
-                                          @if($details->picture!="")
+                                         @if($details->picture!="")
                                           <br>
                                          <img src="{{url('public/images/picture/'.$details->picture)}}" height="80px" width="60px">
                                          @endif
                                      </div>
                                  </div>
                             </div>
-
-                           
                          </div>
-
-                         <div class="row text-center">
-
-                        <button class="btn btn-rose btn-fill" type="submit">Update</button>
-
-                         </div>
-
-                         
-
                      </div>
-
                 </form>
-
              </div>
-
          </div> 
-
      </div>
-
  </div>
-
 </div>
-
-
+<script type="text/javascript">
+    $("#myForm :input").prop("disabled", true);
+</script>
 
 @endsection

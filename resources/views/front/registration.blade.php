@@ -136,7 +136,7 @@
                  <div class="col-md-3">
                     <div class="form-group">
                        <label class="user-label">DOB</label>
-                       <input type="date" name="dob" class="form-control" value="{{old('dob')}}">
+                       <input type="date" name="dob" class="form-control" value="2004-01-01">
                        @if ($errors->has('dob'))
                        <span class="error-block">
                        <strong>{{ $errors->first('dob') }}</strong>
@@ -161,8 +161,8 @@
                  </div>
                  <div class="col-md-3">
                     <div class="form-group">
-                       <label class="user-label">National ID Number<span style="color: red">*</span></label>
-                       <input type="text" name="national_id" class="form-control" required="" value="{{old('national_id')}}">
+                       <label class="user-label">National ID Number</span></label>
+                       <input type="text" name="national_id" class="form-control" value="{{old('national_id')}}">
                        @if ($errors->has('national_id'))
                        <span class="error-block">
                        <strong>{{ $errors->first('national_id') }}</strong>
@@ -255,11 +255,12 @@
                     <div class="form-group">
                        <label class="user-label">Campus Of Study<span style="color: red">*</span></label>
                        <select name="campus_of_study" class="form-control" required="">
-                          <option value="">Select campus of study</option>
-                          <option value="Main Campus-Thika" @if(Input::old('campus_of_study') == 'Main Campus-Thika') selected @endif>Main Campus-Thika</option>
-                          <option value="Kitui" @if(Input::old('campus_of_study') == 'Kitui') selected @endif>Kitui</option>
-                          <option value="Kisumu" @if(Input::old('campus_of_study') == 'Kisumu') selected @endif>Kisumu</option>
-                          <option value="Mombasa" @if(Input::old('campus_of_study') == 'Mombasa') selected @endif>Mombasa</option>
+                           <option value="">Select campus of study</option>
+                             @if(count($campus)>0)
+                              @foreach($campus as $c)
+                              <option value="{{$c->id}}" @if(Input::old('campus_of_study') == $c->id) selected @endif>{{$c->name}}</option>
+                              @endforeach
+                             @endif
                        </select>
                        @if ($errors->has('campus_of_study'))
                        <span class="error-block">

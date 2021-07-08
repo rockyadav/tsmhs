@@ -15,7 +15,7 @@ use DB;
 use Validator;
 use Input;
 
-class RegistrationController extends Controller
+class AdmissionController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -38,18 +38,18 @@ class RegistrationController extends Controller
     {
         $data = DB::table('users')
             ->leftJoin('courses', 'users.intrested_course', '=', 'courses.id')
-            ->where('users.status',1)
+            ->where('users.status', 1)
             ->where('users.role', 2)
-            ->where('users.register_step', 2)
+            ->where('users.register_step', 3)
             ->select('users.*', 'courses.name as course_name')
             ->orderBy('users.id','DESC')
             ->paginate(15);
         $title = 'Students list';
-        return view('admin.registration.list', compact('data', 'title'));
+        return view('admin.admissions.list', compact('data', 'title'));
     }
 
    
-    public function create()
+  public function create()
     {
        
     }
@@ -69,10 +69,7 @@ class RegistrationController extends Controller
         $category = DB::table('categories')->get();
 
         $title = 'Students list';
-        return view('admin.registration.views',compact('courses','details','state','category'));
-       
-
-       
+        return view('admin.admissions.views',compact('courses','details','state','category'));    
     }
 
     public function edit($id)
@@ -89,22 +86,21 @@ class RegistrationController extends Controller
         $category = DB::table('categories')->get();
         $grade = Cluster_requirement::where('status',1)->groupBy('grade')->orderBy('grade','asc')->get();
         $campus = Campus::orderBy('name','desc')->where('status',1)->get();
-        return view('admin.registration.edit',compact('courses','details','state','category','campus','grade'));
+        return view('admin.admissions.edit',compact('courses','details','state','category','campus','grade'));
     }
 
-    
     public function update(Request $request)
     {
      
       $validator = Validator::make($request->all(), [
-          'mobile'              => 'required',
-          'first_name'          => 'required',
-          'last_name'           => 'required',
-          'preferred_intake'    => 'required',
-          'campus_of_study'     => 'required',
+          'mobile'        => 'required',
+          'first_name'       => 'required',
+          'last_name'       => 'required',
+          'preferred_intake'       => 'required',
+          'campus_of_study'       => 'required',
           'mode_of_study'       => 'required',
           'kcse_marksheet'      => 'mimes:jpeg,jpg,png|max:10000',
-          'your_picture'        => 'mimes:jpeg,jpg,png|max:10000',
+          'your_picture'       => 'mimes:jpeg,jpg,png|max:10000',
           ]);
 
         if ($validator->fails()) 
@@ -209,21 +205,7 @@ class RegistrationController extends Controller
             echo 'error';  
       }
     }
-
-
-    public function updatestatus($id,$status)
-    {
-        $update_data = User_registration::updateStatus($id,$status);
-      if($update_data)
-        {
-            $response['status']='success';
-            $response['msg']='Status updated successfully';
-        }else{
-            $response['status']='error';
-            $response['msg']='Please try again';
-        }
-         return $response;
-    }
+   
 
     
 /* end of class*/
